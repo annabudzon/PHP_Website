@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Homeworthy{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/home.css') }}" type="text/css" />
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/home_icon.png') }}" />
+</head>
+<body>
+
+{% block body %}
+<!--- Header --->
+<header class="header">
+    <a class ="logo" href="/" id="logoLink"><img src="{{ asset('images/homeworthy_logo.png') }}" height=120 width=340 /></a>
+
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <div class="logged">
+                    <ul>
+
+                        <li>
+                            <a class="logout" href="{{ path('fos_user_security_logout') }}">
+                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                            </a>
+                        </li>
+                        <li><a class="add" href="{{ path('add') }}">Add offer</a></li>
+                        <li><a href="{{ path('user_account') }}">My account</a></li>
+                        <label class="info">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</label>
+                    </ul>
+
+                </div>
+            {% else %}
+                <div class="sign">
+                    <ul>
+                        <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+                        <li><a href="/register">Register</a></li>
+                    </ul>
+                </div>
+            {% endif %}
+
+
+</header>
+<div class="nav">
+        <ul>
+            <li><a href="{{ path('add') }}">Add Offer</a></li>
+            <li><a href="{{ path('search') }}">Search</a></li>
+            <li><a href="{{ path('about') }}">About</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+        </ul>
+</div>
+<footer>
+        <p>&copy; Anna Budzoń</p>
+</footer>
+
+{% endblock %}
+</body>
+</html>

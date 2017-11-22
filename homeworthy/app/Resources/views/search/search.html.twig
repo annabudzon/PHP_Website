@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Homeworthy - Find your accommodation!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/searcher.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<!--- Search --->
+<div class="searcher">
+    <div class="styled-select">
+
+            <select>
+                <option value="" disabled selected="selected"> <p>City</p> </option>
+                {% for city in cities %}
+                    <option value="city">{{ city }}</option>
+                {% endfor %}
+            </select>
+
+
+            <select>
+                <option value="" disabled selected="selected"> <p>Type of property</p></option>
+                {% for type in types_of_property %}
+                    <option value="type_property">{{ type }}</option>
+                {% endfor %}
+            </select>
+
+
+            <select>
+                <option value="" disabled selected="selected"><p>Type of offer</p></option>
+                {% for type in types_of_offer %}
+                    <option value="type_offers">{{ type }}</option>
+                {% endfor %}
+            </select>
+        <a class="btn" href="#">Search</a>
+
+    </div>
+</div>
+    
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+

@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Contact{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/contact.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class = "content">
+        <h2>Contact</h2>
+
+       <label>Name:</label>
+        <p>Anna</p>
+        <label>Last name:</label>
+        <p>Budzoń</p>
+        <label>E-mail:</label>
+        <p>aniabudzon@gmail.com</p>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}

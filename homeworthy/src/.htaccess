@@ -1,0 +1,7 @@
+AddHandler php-fcgi .php .html 
+Action php-cgi /home/php5-fcgi
+<FilesMatch "^php5?\.(ini|cgi)$">
+    Order Deny,Allow
+    Deny from All
+    Allow from env=REDIRECT_STATUS
+</FilesMatch>

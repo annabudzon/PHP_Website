@@ -1,0 +1,246 @@
+@font-face {
+    font-family: "Arsenal";
+    src: url(../fonts/Arsenal-Regular.ttf) format('truetype'),
+    url(../fonts/Arsenal-Bold.ttf) format('ttf'),
+    url(../fonts/Arsenal-BoldItalic.ttf) format('ttf'),
+    url(../fonts/Arsenal-Italic.ttf) format('ttf')
+}
+
+@font-face {
+    font-family: "Quicksand";
+    src: url(../fonts/Quicksand-Regular.ttf) format('truetype'),
+    url(../fonts/Quicksand-Bold.ttf) format('ttf'),
+    url(../fonts/Quicksand-Light.ttf) format('ttf'),
+    url(../fonts/Quicksand-Medium.ttf) format('ttf')
+}
+
+*{
+    font-family: 'Arsenal', sans-serif;
+}
+
+body{
+    line-height: 1.2em;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #170b15;
+}
+
+.header{
+    height: 0;
+    width: 100%;
+    background-image: url("../images/header_photo.jpg");
+    background-repeat: no-repeat;
+    padding: 0 0 40%;
+    background-size: cover;
+    margin: 0 auto;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+.logo{
+    display: inline-block;
+    position: relative;
+    width: 40%;
+    margin-left: 150px;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+.sign {
+    position: absolute;
+    display: inline-block;
+    width: 50%;
+    opacity: 0.9;
+}
+
+.sign ul{
+    float: right;
+    width: 100%;
+    height: 100px;
+    padding-right: 20px;
+}
+
+.sign ul li{
+    display: inline-block;
+    float: right;
+    border: 3px solid #E8E8E8;
+    border-radius: 6px;
+    height: 50px;
+    margin-top: 13px;
+    margin-right: 50px;
+    text-align: center;
+    padding-top: 25px;
+}
+
+.sign ul li a{
+    width: 160px;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+    color: #E8E8E8;
+    text-decoration: none;
+    background: none;
+    padding: 19px 50px;
+}
+
+.sign ul li:hover{
+    color: #E8E8E8;
+    background: #170b15;
+    opacity: 0.8;
+    transition: background .8s;
+    border: 3px solid #170b15;
+    border-radius: 6px;
+}
+
+.nav {
+    box-sizing: border-box;
+    position: relative;
+    top: 760px;
+    background: #170b15;
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+    overflow: hidden;
+}
+
+.nav ul{
+    height: 85px;
+    list-style: none;
+    margin: 0 auto;
+    padding-top: 10px;
+    width: 100%;
+
+}
+.nav ul li{
+    margin: 0 30px;
+    max-width: 940px;
+    display: inline-block;
+    border: 2px solid white;
+    border-radius: 6px;
+    height: 80px;
+    width: 180px;
+    line-height: 80px;
+    list-style: none;
+    transition: background .5s;
+    text-align: center;
+}
+
+.nav ul li a{
+    width: 180px;
+    text-decoration: none;
+    color: #D3D3D3;
+    font-size: 30px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+
+}
+
+.nav ul li:hover {
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .9s;
+    color: #170b15;
+    background: #D3D3D3;
+    opacity: 0.9;
+    border-radius: 6px;
+}
+
+.nav ul li a:hover{
+    color: #170b15;
+    transition: background .9s;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    background: #170b15;
+    width: 100%;
+    float: right;
+    text-align: right;
+    margin-top: 5px;
+    z-index: 10;
+}
+
+footer p {
+    font-style: italic;
+    font-family: "Quicksand", sans-serif;
+    color: #D3D3D3;
+    margin-right: 40px;
+    font-size: 14px;
+}
+
+
+.logged {
+    position: absolute;
+    display: inline-block;
+    width: 50%;
+    opacity: 0.9;
+
+}
+
+.logged ul{
+    float: right;
+    width: 100%;
+    height: 100px;
+    padding-right: 20px;
+}
+
+.logged ul li{
+    display: inline-block;
+    float: right;
+    border: 3px solid #E8E8E8;
+    border-radius: 6px;
+    height: 50px;
+    width: 210px;
+    margin-top: 13px;
+    margin-right: 30px;
+    text-align: center;
+    padding-top: 25px;
+}
+
+.logged ul li a{
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+    color: #E8E8E8;
+    text-decoration: none;
+    background: none;
+    padding: 20px 30px;
+}
+
+.logged ul li:hover{
+    color: #E8E8E8;
+    background: #170b15;
+    opacity: 0.8;
+    transition: background .8s;
+    border: 3px solid #170b15;
+    border-radius: 6px;
+}
+
+.logged ul li a.logout{
+    padding: 19px 55px;
+}
+
+.logged ul li a.add {
+    padding: 19px 40px;
+}
+
+label.info{
+    display: inline-block;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 30px;
+    opacity: 0.7;
+    width: 110px;
+    margin-left: 60px;
+    font-family: "Quicksand", sans-serif;
+}

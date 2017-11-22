@@ -1,0 +1,137 @@
+*{
+    font-family: "Quicksand", sans-serif;
+    color: #170b15;
+}
+
+.content {
+    position: fixed;
+    top: 200px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    width: 50%;
+    padding: 10px 20px;
+    margin: 0 500px;
+    z-index: 10;
+
+}
+
+h2{
+    font-family: "Passion One", cursive;
+    font-size: 45px;
+    margin-left: 10px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    text-align: center;
+    word-spacing: 12px;
+}
+
+label{
+    font-weight: bold;
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+textarea{
+    width: 100%;
+    padding: 10px 20px;
+    margin: 12px  0 25px 0;
+    display:block;
+    border: 2px solid #E8E8E8;
+    border-radius: 6px;
+    font-size: 13px;
+    background-color: #E8E8E8;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+textarea:focus {
+    border: 2px solid #999999;
+
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 12px  0 25px 0;
+    display: inline-block;
+    border: 2px solid #E8E8E8;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background-color: #E8E8E8;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    border: 2px solid #999999;
+
+
+}
+
+button {
+    font-size: 18px;
+    background-color: #170b15;
+    color: #E8E8E8;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: 1px solid #170b15;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    width: 30%;
+}
+
+button:hover{
+    background: #170b15;
+    opacity: 0.8;
+    transition: background .9s;
+    border-radius: 0 6px 6px 0;
+}
+
+.cancelbtn {
+    font-size: 18px;
+    padding: 14px 20px;
+    background-color: #E8E8E8;
+    color: #170b15;
+    border: 1px solid #999999;
+    border-radius: 6px 0 0 6px;
+}
+
+.cancelbtn:hover {
+    background: #E8E8E8;
+    opacity: 0.7;
+    transition: background .8s;
+    border-radius: 6px 0 0 6px;
+}
+
+.cancelbtn,.addbtn {
+    float: left;
+
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+    border: 2px solid #E8E8E8;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.clearfix{
+    padding-left: 280px;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,163 @@
+*{
+    font-family: "Quicksand", sans-serif;
+    color: #170b15;
+}
+
+.content {
+    position: absolute;
+    top: 180px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    width: 40%;
+    padding: 10px 20px;
+    margin: 0 600px;
+    z-index: 2;
+}
+
+h2{
+    font-family: "Passion One", cursive;
+    font-size: 50px;
+    margin-left: 10px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    text-align: center;
+    word-spacing: 8px;
+    letter-spacing: 2px;
+}
+
+label{
+    font-weight: bold;
+    font-size: 20px;
+    opacity: 0.8;
+    margin-left: 3px;
+}
+
+p{
+    font-weight: 300;
+    font-size: 12px;
+}
+
+span{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+a{
+    display: block;
+    height: 50px;
+    width: 100%;
+}
+
+input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 12px  0 25px 0;
+    display: inline-block;
+    border: 2px solid #E8E8E8;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background-color: #E8E8E8;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+    border: 2px solid #999999;
+
+}
+
+input[type=submit]{
+    font-size: 18px;
+    background-color: #170b15;
+    color: #E8E8E8;
+    padding: 14px 20px;
+    margin: 10px 0;
+    border: 1px solid #170b15;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    height: 52px;
+    width: 50%;
+}
+
+
+input[type=submit]:hover, .cancelbtn:hover{
+    background: #170b15;
+    opacity: 0.8;
+    transition: background .8s;
+    border-radius: 0 6px 6px 0;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    font-size: 18px;
+    padding: 14px 20px;
+    background-color: #E8E8E8;
+    color: #170b15;
+    border: 1px solid #999999;
+    border-radius: 6px 0 0 6px;
+    text-decoration: none;
+    text-align: center;
+    margin: 10px 0;
+    height: 52px;
+    width: 50%;
+}
+
+.cancelbtn:hover {
+    background: #E8E8E8;
+    opacity: 0.7;
+    transition: background .8s;
+    border-radius: 6px 0 0 6px;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn,.signupbtn {
+    float: left;
+    width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+    border: 2px solid #E8E8E8;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    display: inline-block;
+    width:100%;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+        width: 100%;
+    }
+}
+
+.confirmed{
+    padding: 16px;
+    border: 2px solid #E8E8E8;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    display: inline-block;
+    width:100%;
+    height: 100px;
+    text-align: center;
+}
+
+.back{
+    width: 100%;
+    height: 50px;
+    text-align: left;
+    color: #170b15;
+    display: block;
+    margin-top: 30px;
+}

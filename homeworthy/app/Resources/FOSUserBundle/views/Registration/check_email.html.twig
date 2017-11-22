@@ -1,0 +1,17 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Sign up{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/signup.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}
+<div class = "content">
+    <div class="container">
+        <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    </div>
+</div>
+{% endblock fos_user_content %}

@@ -1,0 +1,24 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Sign up{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/signup.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class = "content">
+        <div class="confirmed">
+            <label>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</label>
+            {% if targetUrl %}
+                <a class="back" href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a>
+            {% else %}
+                <a class="back" href="/">{{ 'registration.back'|trans }}</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

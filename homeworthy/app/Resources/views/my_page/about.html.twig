@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Homeworthy - About us{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/about.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class = "content">
+        <h2>About</h2>
+
+        <p><strong>Możliwości strony</strong></p>
+       <ol>
+           <li>Dodawanie ofert o wynajmie lub sprzedaży mieszkania</li>
+           <li>Wyszukiwanie ofert mieszkań do wynajmu</li>
+           <li>Wyszukiwanie ofert mieszkań do kupna</li>
+           <li>Wyszukiwanie pokoju lub miejsca w pokoju</li>
+       </ol>
+
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}

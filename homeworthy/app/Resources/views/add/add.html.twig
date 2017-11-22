@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Add your offer{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/add.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class = "content">
+        <h2>Add Offer</h2>
+
+        <form>
+            <div class="container">
+                <label>Title</label>
+                <input type="text" placeholder="Enter Title" name="title" required>
+
+                <label>Descriprion</label>
+                <textarea name="description" placeholder="Enter Description" cols="40" rows="5"></textarea>
+
+            </div>
+
+            <div class="clearfix">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <button type="add" class="addbtn">Add</button>
+            </div>
+        </form>
+        <div class = "register">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}

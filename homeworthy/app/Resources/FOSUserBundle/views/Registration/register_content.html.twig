@@ -1,0 +1,44 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class = "content">
+    <h2>Sign up</h2>
+    <div class="container">
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_widget(form) }}
+
+        <input type="checkbox" checked="checked"><span>Remember me</span>
+        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+        <div>
+            <a href="{{ path('homepage') }}" id="cancel" name="cancel" class="cancelbtn">Cancel</a>
+            <input type="submit" class="signupbtn" value="{{ 'registration.submit'|trans }}" />
+        </div>
+
+        <!---<div class = "content">
+    <h2>Sign up</h2>
+        <div class="container">
+            <label>Login</label>
+            <input type="text" placeholder="Enter Login" name="login" required>
+
+            <label>Email</label>
+            <input type="email" placeholder="Enter Email" name="email" required>
+
+            <label>Phone number</label>
+            <input type="tel" placeholder="Enter Phone number" name="phone_num" required>
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <label>Repeat Password</label>
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+            <input type="checkbox" checked="checked"><span>Remember me</span>
+            <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+            <div class="clearfix">
+                <a href="{{ path('homepage') }}" name="cancel" class="cancelbtn">Cancel</a>
+                <input type="submit" class="signupbtn" value="{{ 'registration.submit'|trans }}" />
+            </div>
+        </div>
+</div>--->
+        {{ form_end(form) }}
+    </div>
+</div>

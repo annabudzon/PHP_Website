@@ -1,0 +1,49 @@
+{% extends "base_sign.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Sign up{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/signup.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class = "content">
+        <h2>Sign up</h2>
+
+        <form action="/action_page.php">
+            <div class="container">
+                <label>Login</label>
+                <input type="text" placeholder="Enter Login" name="login" required>
+
+                <label>Email</label>
+                <input type="email" placeholder="Enter Email" name="email" required>
+
+                <label>Phone number</label>
+                <input type="tel" placeholder="Enter Phone number" name="phone_num" required>
+
+                <label>Password</label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <label>Repeat Password</label>
+                <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                <input type="checkbox" checked="checked"><span>Remember me</span>
+                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+                <div class="clearfix">
+                    <button type="button" class="cancelbtn">Cancel</button>
+                    <button type="submit" class="signupbtn">Sign Up</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}

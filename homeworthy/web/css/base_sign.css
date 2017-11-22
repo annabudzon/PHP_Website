@@ -1,0 +1,83 @@
+@font-face {
+    font-family: "Arsenal";
+    src: url(../fonts/Arsenal-Regular.ttf) format('truetype'),
+    url(../fonts/Arsenal-Bold.ttf) format('ttf'),
+    url(../fonts/Arsenal-BoldItalic.ttf) format('ttf'),
+    url(../fonts/Arsenal-Italic.ttf) format('ttf')
+}
+
+@font-face {
+    font-family: "Passion One";
+    src: url(../fonts/PassionOne-Regular.ttf) format('truetype'),
+    url(../fonts/PassionOne-Bold.ttf) format('ttf'),
+    url(../fonts/PassionOne-Black.ttf) format('ttf')
+}
+
+@font-face {
+    font-family: "Quicksand";
+    src: url(../fonts/Quicksand-Regular.ttf) format('truetype'),
+    url(../fonts/Quicksand-Bold.ttf) format('ttf'),
+    url(../fonts/Quicksand-Light.ttf) format('ttf'),
+    url(../fonts/Quicksand-Medium.ttf) format('ttf')
+}
+
+*{
+
+    box-sizing: border-box;
+}
+
+body{
+    line-height: 1.2em;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #E8E8E8;
+    font-family: "Quicksand", sans-serif;
+
+}
+
+.background-image {
+    background-image: url("../images/header_photo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: block;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    height: 0;
+    width: 100%;
+    padding: 0 0 50%;
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.logo{
+    display: inline-block;
+    position: fixed;
+    z-index: 10;
+    width: 50%;
+    margin-left: 150px;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    background: none;
+    width: 100%;
+    float: right;
+    text-align: right;
+    padding-right: 40px;
+    margin-top: 5px;
+    z-index: 10;
+    border:none;
+}
+
+footer p{
+    color: #D3D3D3;
+    font-size: 14px;
+}
