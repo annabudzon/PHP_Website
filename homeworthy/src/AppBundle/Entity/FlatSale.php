@@ -12,10 +12,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FlatSaleRepository")
  * @ORM\Table(name="flat_sale")
  */
-class Flat_sale extends Property_sale
+class FlatSale extends Property_sale
 {
     /**
      * @ORM\Column(type="integer")
@@ -42,12 +42,6 @@ class Flat_sale extends Property_sale
     private $localization;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Renovation", inversedBy="flats_sale")
-     * @ORM\JoinColumn(name="id_renovation", referencedColumnName="id_renovation")
-     */
-    private $renovation;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Building", inversedBy="flats_sale")
      * @ORM\JoinColumn(name="id_building", referencedColumnName="id_building")
      */
@@ -72,6 +66,12 @@ class Flat_sale extends Property_sale
     private $flat_photos;
 
     /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Photo", mappedBy="flat_sale", cascade={"all", "remove"})
+     */
+    private $plan;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $balcony;
@@ -89,6 +89,7 @@ class Flat_sale extends Property_sale
     public function __construct()
     {
         $this->flat_photos = new ArrayCollection();
+        $this->plan = new ArrayCollection();
     }
 
     /**
@@ -100,7 +101,7 @@ class Flat_sale extends Property_sale
     }
 
     /**
-     * @param mixed $id_flat
+     * @param mixed $id_flat_sale
      */
     public function setIdFlat($id_flat_sale)
     {
@@ -182,7 +183,7 @@ class Flat_sale extends Property_sale
     /**
      * @param mixed $user
      */
-    public function setOwner($user)
+    public function setUser($user)
     {
         $this->user = $user;
     }
@@ -270,18 +271,29 @@ class Flat_sale extends Property_sale
     /**
      * @return mixed
      */
-    public function getDateR()
+    public function getDate()
     {
-        return $this->date_r;
+        return $this->date;
     }
 
     /**
-     * @param mixed $date_r
+     * @param mixed $date
      */
-    public function setDateR($date_r)
+    public function setDate($date)
     {
-        $this->date_r = $date_r;
+        $this->dat = $date;
     }
+
+    /**
+     * @ORM\PrePersist()
+     *
+     */
+
+    public function prePersist()
+    {
+        $this->date = new \DateTime;
+    }
+
 
     /**
      * @return mixed
@@ -411,5 +423,43 @@ class Flat_sale extends Property_sale
         $this->owner_type = $owner_type;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFlatPhotos()
+    {
+        return $this->flat_photos;
+    }
 
+    /**
+     * @param mixed $flat_photos
+     */
+    public function setFlatPhotos($flat_photos)
+    {
+        $this->flat_photos = $flat_photos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlan()
+    {
+        return $this->plan;
+    }
+
+    /**
+     * @param mixed $plan
+     */
+    public function setPlan($plan)
+    {
+        $this->plan = $plan;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getUserId()
+    {
+        return $this->getUserId();
+    }
 }

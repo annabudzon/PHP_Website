@@ -37,6 +37,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes:
+            - 'Form/vich_fields.html.twig' # path for your template
 
 # Doctrine Configuration
 doctrine:
@@ -78,6 +80,19 @@ fos_user:
     from_email:
         address: "noreply@yourcompany.com"
         sender_name: "No Reply"
+    resetting:
+        email:
+                from_email:
+                    address: resetting@example.com
+                    sender_name: Demo Resetting
     registration:
            form:
                type: AppBundle\Form\RegistrationType
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+            offer_images:
+                uri_prefix:        /images/offer_images
+                upload_destination: '%kernel.root_dir%/../web/uploads/images/offers'
+                namer:              vich_uploader.namer_uniqid

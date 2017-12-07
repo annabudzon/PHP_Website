@@ -30,7 +30,7 @@ class Country
     private $country;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Localization", mappedBy="country", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Localization", mappedBy="country", cascade={"persist","all", "remove"})
      */
     private $localizations;
 
@@ -87,5 +87,8 @@ class Country
         $this->localizations = $localizations;
     }
 
-
+    public function __toString()
+    {
+        return $this->country;
+    }
 }

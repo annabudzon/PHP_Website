@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Add your offer{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/add.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <div class = "content">
+        <h2>Add Flat Rental Offer</h2>
+            <div class="container">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <ul>
+                    {#% for photo in form.roomPhotos%#}
+                    <!--- <li>
+                            {#% include '@VichUploader/Form/fields.html.twig' %#}
+                        </li>--->
+                    {#% endfor %#}
+                </ul>
+                <div class="clearfix">
+                    <a href="{{ path('add') }}" name="cancel" class="cancelbtn">Cancel</a>
+                    <input type="submit" class="addbtn" value="Create" />
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+    </div>
+    <div class="space"></div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

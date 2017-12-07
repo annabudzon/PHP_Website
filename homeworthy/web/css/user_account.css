@@ -1,0 +1,198 @@
+.wrapper {
+    position: absolute;
+    background: none;
+    width: 100%;
+    height:100%;
+    z-index: 10;
+    padding: 0;
+}
+
+.content {
+    position: absolute;
+    top: 120px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    width: 40%;
+    padding: 10px 20px;
+    margin: 0 600px;
+    z-index: 2;
+    text-decoration: none;
+    color: #170b15;
+}
+
+h1{
+    font-family: "Quicksand", sans-serif;
+    color: #170b15;
+    font-weight: bold;
+    margin-bottom: 25px;
+    font-size: 26px;
+
+}
+
+.empty-data{
+    margin-bottom: 60px;
+}
+
+h2{
+    font-family: "Passion One", cursive;
+    font-size: 40px;
+    margin-left: 10px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    text-align: center;
+    word-spacing: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+
+}
+
+label{
+    font-weight: bold;
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+.content ul {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+}
+
+
+.content ul li{
+    width: 100%;
+    height: 100px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    padding-top: 25px;
+
+}
+
+.content ul li a{
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.btn {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #170b15;
+    color: #E8E8E8;
+    padding: 18px 20px 13px 20px;
+    margin: 10px 0;
+    border: 1px solid #170b15;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 60px;
+    opacity: 0.95;
+}
+
+.btn:hover {
+    background: #170b15;
+    opacity: 0.8;
+    transition: background .9s;
+    border-radius: 6px;
+}
+
+input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 12px  0 25px 0;
+    display: inline-block;
+    border: 2px solid #E8E8E8;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background-color: #E8E8E8;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+    border: 2px solid #999999;
+
+}
+
+input[type=submit]{
+    font-size: 20px;
+    background-color: #170b15;
+    color: #E8E8E8;
+    padding: 14px 20px;
+    margin: 10px 0;
+    border: 1px solid #170b15;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 60px;
+    width: 100%;
+}
+
+.short{
+    width: 100%;
+
+}
+
+.short ul{
+    text-align: left;
+    width: 100%;
+    display: block;
+    float:left;
+    border: 2px solid #E8E8E8;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.short ul li{
+    text-align: left;
+    width: 100%;
+    padding: 0;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.space{
+    z-index: 10;
+    width: 100%;
+    height: 40px;
+    top: 1200px;
+    position:relative;
+    display:block;
+    clear: both;
+
+}
+
+.add-offer{
+    text-decoration: none;
+    text-align:center;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #170b15;
+    color: #E8E8E8;
+    padding: 18px 20px 13px 20px;
+    margin: 50px 0;
+    border: 1px solid #170b15;
+    border-radius: 6px;
+    height: 60px;
+    opacity: 0.95;
+}
+
+.add-offer:hover {
+    background: #170b15;
+    opacity: 0.8;
+    transition: background .9s;
+    border-radius: 6px;
+}
+
+.empty{
+    width:100%;
+
+    height: 180px;
+    text-align: center;
+    padding: 10px;
+    display:block;
+}
+

@@ -51,6 +51,11 @@ abstract class Property_rental
     protected $available;
 
     /**
+     * @ORM\Column(type="date")
+     */
+    protected $renovation;
+
+    /**
      * @ORM\Column(type="float")
      */
     protected $rent_price;
@@ -100,11 +105,4 @@ abstract class Property_rental
      */
     protected $pets;
 
-    /**
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank(message="Please, upload image.")
-     * @Assert\Image()
-     */
-    protected $plan;
 }

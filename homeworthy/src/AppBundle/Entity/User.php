@@ -8,6 +8,9 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\FlatRent;
+use AppBundle\Entity\FlatSale;
+use AppBundle\Entity\RoomRent;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -26,8 +29,6 @@ class User extends BaseUser
      */
     protected $id;
 
-
-
     /**
      * @ORM\Column(type="integer")
      */
@@ -39,17 +40,17 @@ class User extends BaseUser
     private $registration_date;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Room_rental", mappedBy="user", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\RoomRent", mappedBy="user", cascade={"all", "remove"})
      */
     private $rooms_rental;
 
    /**
-    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_rental", mappedBy="user", cascade={"all", "remove"})
+    * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatRent", mappedBy="user", cascade={"all", "remove"})
     */
    private $flats_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_sale", mappedBy="user", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatSale", mappedBy="user", cascade={"all", "remove"})
      */
     private $flats_sale;
 
@@ -59,6 +60,7 @@ class User extends BaseUser
         $this->rooms_rental = new ArrayCollection();
         $this->flats_rental = new ArrayCollection();
         $this->flats_sale = new ArrayCollection();
+        $this->roles = array('ROLE_USER');
     }
 
     /**
@@ -72,7 +74,9 @@ class User extends BaseUser
     }
 
     /**
-     * @return mixed
+     * Get id
+     *
+     * @return int
      */
     public function getId()
     {
@@ -85,6 +89,22 @@ class User extends BaseUser
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhone_Nr()
+    {
+        return $this->phone_nr;
+    }
+
+    /**
+     * @param mixed $phone_nr
+     */
+    public function setPhone_Nr($phone_nr)
+    {
+        $this->phone_nr = $phone_nr;
     }
 
     /**
@@ -106,7 +126,7 @@ class User extends BaseUser
     /**
      * @return mixed
      */
-    public function getRegistrationDate()
+    public function getRegistration_Date()
     {
         return $this->registration_date;
     }
@@ -114,29 +134,24 @@ class User extends BaseUser
     /**
      * @param mixed $registration_date
      */
-    public function setRegistrationDate($registration_date)
+    public function setRegistration_Date($registration_date)
     {
         $this->registration_date = $registration_date;
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
-    public function getOwnerType()
+    public function getLast_Login()
     {
-        return $this->owner_type;
+        return $this->lastLogin;
     }
 
-    /**
-     * @param mixed $owner_type
-     */
-    public function setOwnerType($owner_type)
-    {
-        $this->owner_type = $owner_type;
-    }
 
     /**
-     * @return mixed
+     * Get Room_rentals
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getRoomsRental()
     {
@@ -152,7 +167,9 @@ class User extends BaseUser
     }
 
     /**
-     * @return mixed
+     * Get Flat_rentals
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
    public function getFlatsRental()
     {
@@ -168,7 +185,9 @@ class User extends BaseUser
     }
 
     /**
-     * @return mixed
+     * Get Flat_sales
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFlatsSale()
     {
@@ -182,6 +201,85 @@ class User extends BaseUser
     {
         $this->flats_sale = $flats_sale;
     }
+
+
+    /**
+     * Add room_rental
+     *
+     * @param RoomRent $room_rental
+     *
+     * @return User
+     */
+    public function addRoomRental(RoomRent $room_rental)
+    {
+        $this->rooms_rental[] = $room_rental;
+
+        return $this;
+    }
+
+    /**
+     * Remove room_rental
+     *
+     * @param RoomRent $room_rental
+     */
+    public function removeRoomRental(RoomRent $room_rental)
+    {
+        $this->rooms_rental->removeElement($room_rental);
+    }
+
+    /**
+     * Add room_rental
+     *
+     * @param FlatRent $flat_rental
+     *
+     * @return User
+     */
+    public function addFlatRental(FlatRent $flat_rental)
+    {
+        $this->flats_rental[] = $flat_rental;
+
+        return $this;
+    }
+
+    /**
+     * Remove Room_rent
+     *
+     * @param FlatRent $flat_rental
+     */
+    public function removeFlatRental(FlatRent $flat_rental)
+    {
+        $this->flats_rental->removeElement($flat_rental);
+    }
+
+    /**
+     * Add room_rental
+     *
+     * @param FlatSale $flat_sale
+     *
+     * @return User
+     */
+    public function addFlatSale(FlatSale $flat_sale)
+    {
+        $this->flats_sale[] = $flat_sale;
+
+        return $this;
+    }
+
+    /**
+     * Remove Room_rent
+     *
+     * @param FlatSale $flat_sale
+     */
+    public function removeFlatSale(FlatSale $flat_sale)
+    {
+        $this->flats_sale->removeElement($flat_sale);
+    }
+
+    public function __toString()
+    {
+        return $this->username." (email: ".$this->email.")";
+    }
+
 
 
 }

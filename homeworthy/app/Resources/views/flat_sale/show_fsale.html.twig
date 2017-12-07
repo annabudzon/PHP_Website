@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Homeworthy - About us{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/show.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class = "content">
+            {% if status == 1 %}
+                <p class="success">Added successfully!</p>
+            {% endif %}
+            <h2>{{ flat_sale.title }}</h2>
+
+            <p><span>{{ 'Publicated' }}</span>: {{ flat_sale.date|date(" m/d/Y H:i:s") }}</p>
+            <p><span>{{ 'Type of property'}}</span>: {{ flat_sale.propertyType }}
+            <p><span>{{ 'Owner type'}}</span>: {{ flat_sale.ownerType }}
+            <p><span>{{ 'Owner '}}</span>: {{ flat_sale.user }}
+            <p><span>{{ 'Description' }}</span>: {{ flat_sale.description ? 'Yes':'No' }}</p>
+            <p><span>{{ 'Available from'}}</span>: {{ flat_sale.available|date(" m/d/Y")}}</p>
+            <p><span>{{ 'Localization'}}</span>: {{ flat_sale.localization }} </p>
+            <p><span>{{ 'Building '}}</span>: {{ flat_sale.building }}</p>
+            <p><span>{{ 'Rooms number '}}</span>: {{ flat_sale.roomsNumber|trans }}
+            <p><span>{{ 'Size'}}</span>: {{ flat_sale.size }}</p>
+            <p><span>{{ 'Last renovation'}}</span>: {{ flat_sale.renovation|date(" m/d/Y")}} </p>
+            <p><span>{{ 'Meter price' }}</span>: {{ flat_sale.meterPrice }} </p>
+            <p><span>{{ 'Instalments'}}</span>: {{ flat_sale.instalments ? 'Yes':'No' }}</p>
+            <p><span>{{ 'Total price' }}</span>: {{ flat_sale.totalPrice }} </p>
+            <p><span>{{ 'Floor' }}</span>: {{ flat_sale.floor }} </p>
+            <p><span>{{ 'Furnished' }}</span>: {{ flat_sale.furnished ? 'Yes':'No' }} </p>
+            <p><span>{{ 'Balcony' }}</span>: {{ flat_sale.balcony ? 'Yes':'No' }} </p>
+
+        </div>
+        <div class="space"></div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

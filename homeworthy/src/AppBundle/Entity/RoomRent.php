@@ -12,10 +12,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\RoomRentRepository")
  * @ORM\Table(name="room_rental")
  */
-class Room_rental extends  Property_rental
+class RoomRent extends  Property_rental
 {
 
     /**
@@ -44,12 +44,6 @@ class Room_rental extends  Property_rental
     private $localization;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Renovation", inversedBy="rooms_rental")
-     * @ORM\JoinColumn(name="id_renovation", referencedColumnName="id_renovation")
-     */
-    private $renovation;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Building", inversedBy="rooms_rental")
      * @ORM\JoinColumn(name="id_building", referencedColumnName="id_building")
      */
@@ -73,9 +67,10 @@ class Room_rental extends  Property_rental
     private $room_photos;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Localization", mappedBy="city", cascade={"all", "remove"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Photo", inversedBy="room_rental_plan")
+     * @ORM\JoinColumn(name="id_photo", referencedColumnName="id_photo", onDelete="CASCADE")
      */
-    private $localizations;
+    private $plan;
 
     /**
      * @ORM\Column(type="boolean")
@@ -123,6 +118,17 @@ class Room_rental extends  Property_rental
     {
         $this->date = $date;
     }
+
+    /**
+     * @ORM\PrePersist()
+     *
+     */
+
+    public function prePersist()
+    {
+        $this->date = new \DateTime;
+    }
+
 
     /**
      * @return mixed
@@ -367,22 +373,6 @@ class Room_rental extends  Property_rental
     /**
      * @return mixed
      */
-    public function getLocalization()
-    {
-        return $this->localization;
-    }
-
-    /**
-     * @param mixed $localization
-     */
-    public function setLocalization($localization)
-    {
-        $this->localization = $localization;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getRenovation()
     {
         return $this->renovation;
@@ -495,22 +485,6 @@ class Room_rental extends  Property_rental
     /**
      * @return mixed
      */
-    public function getLocalizations()
-    {
-        return $this->localizations;
-    }
-
-    /**
-     * @param mixed $localizations
-     */
-    public function setLocalizations($localizations)
-    {
-        $this->localizations = $localizations;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getOwnerType()
     {
         return $this->owner_type;
@@ -524,5 +498,67 @@ class Room_rental extends  Property_rental
         $this->owner_type = $owner_type;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRoomPhotos()
+    {
+        return $this->room_photos;
+    }
 
+    /**
+     * @param mixed $room_photos
+     */
+    public function setRoomPhotos($room_photos)
+    {
+        $this->room_photos = $room_photos;
+    }
+
+    /**
+     * Add photo
+     *
+     * @param Photo $photo
+     *
+     * @return RoomRent
+     */
+    public function addPhoto(Photo $photo)
+    {
+        $this->room_photos[] = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param Photo $photo
+     */
+    public function removePhoto(Photo $photo)
+    {
+        $this->room_photos->removeElement($photo);
+    }
+
+    /**
+     * @param mixed $localization
+     */
+    public function setLocalization($localization)
+    {
+        $this->localization = $localization;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocalization()
+    {
+        return $this->localization;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getUserId()
+    {
+        return $this->getUserId();
+    }
 }

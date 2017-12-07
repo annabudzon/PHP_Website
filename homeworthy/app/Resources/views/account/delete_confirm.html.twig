@@ -1,0 +1,33 @@
+{% extends "base_sign.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Sign up{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/user_account.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class = "content">
+        <div class="container">
+
+            {{ form_start(delete_form) }}
+            <h2>Delete this account</h2>
+            <p> Are you sure you want to delete '{{ user.username }}'?</p>
+            <div>
+                <button type="submit" id="proceed" name="proceed" class="delete">Delete</button>
+                <button type="button" class="cancelbtn">Cancel</button>
+            </div>
+            {{ form_end(delete_form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}

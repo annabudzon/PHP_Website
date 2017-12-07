@@ -16,11 +16,26 @@
     {% block header %}
         <div class="background-image"></div>
         <a class ="logo" href="{{ path('homepage') }}" id="logoLink"><img src="{{ asset('images/homeworthy_logo.png') }}" height=120 width=340 /></a>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <div class="logged">
+                <ul>
+                    <li>
+                        <a class="logout" href="{{ path('fos_user_security_logout') }}">
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                    </li>
+                    <label class="info">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</label>
+                </ul>
+
+            </div>
+        {% endif %}
     {% endblock %}
 </header>
 
 
 <div class ="contents">{% block content %}{% endblock %} </div>
+
+
 
 <footer>
     {% block footer %}

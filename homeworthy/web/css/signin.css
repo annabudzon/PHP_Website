@@ -30,12 +30,17 @@ label{
     font-weight: bold;
     font-size: 20px;
     opacity: 0.8;
-
 }
 
 p{
     font-size: 14px;
     font-weight: 500;
+    display: inline;
+}
+
+.alert{
+    color: #ff1f46;
+    font-size: 18px;
     display: inline;
 }
 
@@ -141,28 +146,30 @@ span.psw {
 }
 
 .register{
-    position: relative;
-    top: 740px;
-    background: rgba(255, 255, 255, 0.35);
-    border-radius: 6px 6px 30px 30px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
-    width: 20%;
-    padding: 12px 30px;
-    margin: 0 840px;
-    z-index: 2;
-    text-align: center;
+   width: 100%;
+
 }
 
 .register a{
+    position: absolute;
+    display: inline;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 6px 6px 30px 30px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    padding: 12px 90px;
+    z-index: 2;
+    text-align: center;
     text-transform: uppercase;
     text-decoration: none;
+    font-weight: bold;
     font-size: 20px;
     color: #170b15;
     opacity: 0.75;
+    margin-top: 100px;
 
 }
 
-.register:hover{
+.register a:hover{
     transition: background .8s;
     background: #E8E8E8;
 }
@@ -183,3 +190,11 @@ span.psw {
     color: #170b15;
     font-style: italic;
 }
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+

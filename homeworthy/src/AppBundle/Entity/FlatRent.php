@@ -10,12 +10,13 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FlatRentRepository")
  * @ORM\Table(name="flat_rental")
  */
-class Flat_rental extends  Property_rental
+class FlatRent extends  Property_rental
 {
     /**
      * @ORM\Id
@@ -37,16 +38,12 @@ class Flat_rental extends  Property_rental
     private $owner_type;
 
     /**
+     * @Assert\Type(type="AppBundle\Entity\Localization")
+     * @Assert\Valid()
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Localization", inversedBy="flats_rental")
      * @ORM\JoinColumn(name="id_localization", referencedColumnName="id_localization")
      */
     private $localization;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Renovation", inversedBy="flats_rental")
-     * @ORM\JoinColumn(name="id_renovation", referencedColumnName="id_renovation")
-     */
-    private $renovation;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Building", inversedBy="flats_rental")
@@ -73,6 +70,12 @@ class Flat_rental extends  Property_rental
     private $flat_photos;
 
     /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Photo", mappedBy="flat_rental", cascade={"all", "remove"})
+     */
+    private $plan;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $children;
@@ -85,6 +88,7 @@ class Flat_rental extends  Property_rental
     public function __construct()
     {
         $this->flat_photos = new ArrayCollection();
+        $this->plan = new ArrayCollection();
     }
 
     /**
@@ -216,7 +220,7 @@ class Flat_rental extends  Property_rental
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTitle()
     {
@@ -245,6 +249,16 @@ class Flat_rental extends  Property_rental
     public function setDate($date)
     {
         $this->date = $date;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     *
+     */
+
+    public function prePersist()
+    {
+        $this->date = new \DateTime;
     }
 
     /**
@@ -519,6 +533,12 @@ class Flat_rental extends  Property_rental
         $this->owner_type = $owner_type;
     }
 
-
+    /**
+     * @return integer
+     */
+    public function getUserId()
+    {
+        return $this->getUserId();
+    }
 
 }

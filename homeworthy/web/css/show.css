@@ -1,0 +1,66 @@
+*{
+    font-family: "Quicksand", sans-serif;
+    color: #170b15;
+}
+
+.content {
+    position: absolute;
+    top: 100px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    width: 50%;
+    padding: 10px 20px;
+    margin: 0 500px;
+    z-index: 2;
+}
+
+h2{
+    font-family: "Passion One", cursive;
+    font-size: 40px;
+    margin-left: 10px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+p{
+    font-size: 18px;
+}
+
+span{
+   font-weight: bold;
+    font-size: 20px;
+}
+
+p .success{
+    margin-left: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    opacity: 0.8;
+    color: #6f0f37;
+}
+
+ul li{
+    font-size: 21px;
+
+}
+
+.space{
+    z-index: 10;
+    width: 100%;
+    height: 40px;
+    top: 1100px;
+    position:relative;
+    display:block;
+    clear: both;
+}
+
+.wrapper {
+    position: absolute;
+    background: none;
+    width: 100%;
+    height:100%;
+    z-index: 10;
+    padding: 0;
+}

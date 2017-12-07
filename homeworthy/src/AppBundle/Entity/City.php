@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="CityRepository")
+ * @ORM\Entity
  * @ORM\Table(name="city")
  */
 class City
@@ -30,7 +30,7 @@ class City
     private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Localization", mappedBy="city", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Localization", mappedBy="city", cascade={"persist","all", "remove"})
      */
     private $localizations;
 
@@ -86,5 +86,11 @@ class City
     {
         $this->localizations = $localizations;
     }
+
+    public function __toString()
+    {
+        return $this->city;
+    }
+
 
 }

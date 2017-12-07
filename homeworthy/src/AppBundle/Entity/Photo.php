@@ -8,12 +8,17 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PhotoRepository")
  * @ORM\Table(name="photo")
+ * @Vich\Uploadable
  */
 class Photo
 {
@@ -25,31 +30,60 @@ class Photo
     private $id_photo;
 
     /**
-     * @Assert\NotBlank(message="Please, upload images.")
-     * @Assert\Image()
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Flat_rental", inversedBy="flat_photos")
+     *@Assert\File(
+     *     mimeTypes = {"image/png", "image/jpeg", "image/jpg"},
+     *     mimeTypesMessage = "Please upload a valid PDF or valid IMAGE")
+     *@Vich\UploadableField(mapping="offer_image", fileNameProperty="photo_name", size="photo_size")
+     *@var File
+     *
+     */
+    public $photo;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $photo_name;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $photo_size;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FlatRent", inversedBy="flat_photos")
      * @ORM\JoinColumn(name="id_flat", referencedColumnName="id_flat", onDelete="CASCADE")
      */
     private $flat_rental;
 
     /**
-     * @Assert\NotBlank(message="Please, upload images.")
-     * @Assert\Image()
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Room_rental", inversedBy="room_photos")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\RoomRent", mappedBy="plan", cascade={"all", "remove"})
+     */
+    private $room_rental_plan;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\RoomRent", inversedBy="room_photos")
      * @ORM\JoinColumn(name="id_room", referencedColumnName="id_room", onDelete="CASCADE")
      */
     private $room_rental;
 
+
+
     /**
-     * @Assert\NotBlank(message="Please, upload images.")
-     * @Assert\Image()
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Flat_sale", inversedBy="flat_photos")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FlatSale", inversedBy="flat_photos")
      * @ORM\JoinColumn(name="id_flat_sale", referencedColumnName="id_flat_sale", onDelete="CASCADE")
      */
     private $flat_sale;
 
     /**
-     * @return mixed
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @return integer
      */
     public function getIdPhoto()
     {
@@ -57,7 +91,7 @@ class Photo
     }
 
     /**
-     * @param mixed $id_photo
+     * @param integer $id_photo
      */
     public function setIdPhoto($id_photo)
     {
@@ -65,7 +99,7 @@ class Photo
     }
 
     /**
-     * @return mixed
+     * @return FlatRent
      */
     public function getFlatRental()
     {
@@ -73,7 +107,7 @@ class Photo
     }
 
     /**
-     * @param mixed $flat_rental
+     * @param FlatRent $flat_rental
      */
     public function setFlatRental($flat_rental)
     {
@@ -81,7 +115,7 @@ class Photo
     }
 
     /**
-     * @return mixed
+     * @return RoomRent
      */
     public function getRoomRental()
     {
@@ -89,7 +123,7 @@ class Photo
     }
 
     /**
-     * @param mixed $room_rental
+     * @param RoomRent $room_rental
      */
     public function setRoomRental($room_rental)
     {
@@ -97,7 +131,7 @@ class Photo
     }
 
     /**
-     * @return mixed
+     * @return FlatSale
      */
     public function getFlatSale()
     {
@@ -105,11 +139,103 @@ class Photo
     }
 
     /**
-     * @param mixed $flat_sale
+     * @param FlatSale $flat_sale
      */
     public function setFlatSale($flat_sale)
     {
         $this->flat_sale = $flat_sale;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $photo
+     *
+     * @return Photo
+     */
+    public function setImageFile(File $photo = null )
+    {
+        $this->photo = $photo;
+
+        if ($this->photo instanceof UploadedFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return File|null
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPhotoName()
+    {
+        return $this->photo_name;
+    }
+
+    /**
+     * @param string $photo_name
+     */
+    public function setPhotoName($photo_name)
+    {
+        $this->photo_name = $photo_name;
+    }
+
+    /**
+     *
+     * @return Photo
+     */
+    public function getPhotoSize()
+    {
+        return $this->photo_size;
+    }
+
+    /**
+     * @param integer $photo_size
+     */
+    public function setPhotoSize($photo_size)
+    {
+        $this->photo_size = $photo_size;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoomRentalPlan()
+    {
+        return $this->room_rental_plan;
+    }
+
+    /**
+     * @param mixed $room_rental_plan
+     */
+    public function setRoomRentalPlan($room_rental_plan)
+    {
+        $this->room_rental_plan = $room_rental_plan;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
 

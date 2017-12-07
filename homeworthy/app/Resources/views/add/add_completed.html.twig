@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Offer added.{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/add.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class = "content">
+        <h2>Adding completed</h2>
+        <p> Your offer was added successfully!</p>
+        <a href="{{ path("offers") }}">Check your offers</a>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}

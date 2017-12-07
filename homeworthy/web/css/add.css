@@ -3,18 +3,28 @@
     color: #170b15;
 }
 
+
+.wrapper {
+    position: absolute;
+    background: none;
+    width: 100%;
+    height:100%;
+    z-index: 10;
+    padding: 0;
+}
+
 .content {
-    position: fixed;
-    top: 200px;
+    position: absolute;
+    top: 100px;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 6px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
-    width: 50%;
-    padding: 10px 20px;
-    margin: 0 500px;
+    width: 60%;
+    padding: 10px 30px;
+    margin: 0 400px 30px 400px;
     z-index: 10;
-
 }
+
 
 h2{
     font-family: "Passion One", cursive;
@@ -26,20 +36,25 @@ h2{
     word-spacing: 12px;
 }
 
+p{
+    font-size: 15px;
+}
+
 label{
-    font-weight: bold;
-    font-size: 20px;
+    font-weight: 900;
+    font-size: 21px;
     opacity: 0.8;
 }
 
 textarea{
-    width: 100%;
+    width: 90%;
+    height: 200px;
     padding: 10px 20px;
-    margin: 12px  0 25px 0;
+    margin: 12px  0 25px 40px;
     display:block;
     border: 2px solid #E8E8E8;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 18px;
     background-color: #E8E8E8;
     -webkit-transition: 0.5s;
     transition: 0.5s;
@@ -51,13 +66,15 @@ textarea:focus {
 
 }
 
-input[type=text] {
+input {
     width: 100%;
+    height: 50px;
+    font-size: 18px;
     padding: 8px 20px;
     margin: 12px  0 25px 0;
     display: inline-block;
     border: 2px solid #E8E8E8;
-    border-radius: 6px;
+    border-radius: 10px;
     box-sizing: border-box;
     background-color: #E8E8E8;
     -webkit-transition: 0.5s;
@@ -65,25 +82,27 @@ input[type=text] {
 
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input:focus{
     border: 2px solid #999999;
 
 
 }
 
-button {
-    font-size: 18px;
+button, .addbtn {
+    font-size: 20px;
     background-color: #170b15;
     color: #E8E8E8;
-    padding: 14px 20px;
-    margin: 8px 0;
+    padding-top: 8px;
+    margin: 10px 0;
     border: 1px solid #170b15;
     border-radius: 0 6px 6px 0;
     cursor: pointer;
     width: 30%;
+    height: 60px;
+    text-align: center;
 }
 
-button:hover{
+button:hover, .addbtn:hover{
     background: #170b15;
     opacity: 0.8;
     transition: background .9s;
@@ -91,12 +110,17 @@ button:hover{
 }
 
 .cancelbtn {
-    font-size: 18px;
-    padding: 14px 20px;
+    width: 30%;
+    height: 60px;
+    font-size: 20px;
+    padding-top: 20px;
     background-color: #E8E8E8;
     color: #170b15;
     border: 1px solid #999999;
     border-radius: 6px 0 0 6px;
+    text-decoration: none;
+    text-align: center;
+    margin: 10px 0;
 }
 
 .cancelbtn:hover {
@@ -131,7 +155,104 @@ button:hover{
 
 
 @media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
+    .cancelbtn, .addbtn {
         width: 100%;
     }
 }
+
+.nav {
+    z-index: 1;
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+.nav ul{
+    width: 100%;
+    text-align: center;
+}
+
+.nav ul li{
+    display: inline-block;
+    margin-top: 13px;
+    margin-right: 80px;
+    text-align: center;
+    padding-top: 25px;
+ }
+
+.nav ul li a{
+    border: 3px solid #170b15;
+    border-radius: 6px;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    font-family: 'Arsenal', sans-serif;
+    color: #E8E8E8;
+    text-decoration: none;
+    background-color:#170b15;
+    opacity: 0.95;
+    padding: 25px 50px;
+
+}
+
+.nav ul li a:hover{
+    color: #E8E8E8;
+    background: #170b15;
+    opacity: 0.8;
+    transition: background .8s;
+    border: 3px solid #170b15;
+    border-radius: 6px;
+}
+
+select{
+    background: #D3D3D3 url("../images/select-icon.png") no-repeat right center;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    font-size: 18px;
+    color: #170b15;
+    width: 230px;
+    height: 50px;
+    border: 5px solid #D3D3D3;
+    overflow: hidden;
+    border-radius: 15px;
+    margin: 20px 30px;
+
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select:focus{
+
+    opacity: 0.8;
+}
+
+.space{
+    z-index: 10;
+    width: 100%;
+    height: 40px;
+    top: 3000px;
+    position:relative;
+    display:block;
+    clear: both;
+
+}
+
+.space2{
+
+    width: 100%;
+    height: 40px;
+    top: 2400px;
+    position:relative;
+    display:block;
+    clear: both;
+
+}
+
+

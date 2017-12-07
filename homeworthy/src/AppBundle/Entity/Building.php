@@ -31,17 +31,17 @@ class Building
     private $building_type;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Room_rental", mappedBy="building")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\RoomRent", mappedBy="building")
      */
     private $rooms_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_rental", mappedBy="building")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatRent", mappedBy="building")
      */
     private $flats_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_sale", mappedBy="building")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatSale", mappedBy="building")
      */
     private $flats_sale;
 
@@ -130,6 +130,11 @@ class Building
     public function setFlatsSale($flats_sale)
     {
         $this->flats_sale = $flats_sale;
+    }
+
+    public function __toString()
+    {
+        return $this->building_type;
     }
 
 }

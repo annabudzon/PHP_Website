@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Homeworthy - About us{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/show.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <div class = "content">
+        {% if status == true %}
+            <p class="success">Added successfully!</p>
+        {% endif %}
+        <h2>{{ room_rental.title }}</h2>
+
+        <p><span>{{ 'Publicated' }}</span>: {{ room_rental.date|date(" m/d/Y H:i:s") }}</p>
+        <p><span>{{ 'Type of property'}}</span>: {{ room_rental.propertyType }}
+        <p><span>{{ 'Owner type'}}</span>: {{ room_rental.ownerType }}
+        <p><span>{{ 'Owner '}}</span>: {{ room_rental.user }}
+        <p><span>{{ 'Description' }}</span>: {{ room_rental.description ? 'Yes':'No' }}</p>
+        <p><span>{{ 'Available from'}}</span>: {{ room_rental.available|date(" m/d/Y")}}</p>
+        <p><span>{{ 'Localization'}}</span>: {{ room_rental.localization }} </p>
+        <p><span>{{ 'Building '}}</span>: {{ room_rental.building }}</p>
+        <p><span>{{ 'Tenats number '}}</span>: {{ room_rental.tenantsNumber|trans }}
+        <p><span>{{ 'Size'}}</span>: {{ room_rental.size }}</p>
+        <p><span>{{ 'Last renovation'}}</span>: {{ room_rental.renovation|date(" m/d/Y")}} </p>
+        <p><span>{{ 'Rent price' }}</span>: {{ room_rental.rentPrice }} </p>
+        <p><span>{{ 'Owner price' }}</span>: {{ room_rental.ownerPrice }} </p>
+        <p><span>{{ 'Media price' }}</span>: {{ room_rental.mediaPrice }} </p>
+        <p><span>{{ 'Advance' }}</span>: {{ room_rental.advance }} </p>
+        <p><span>{{ 'Total price' }}</span>: {{ room_rental.totalPrice }} </p>
+        <p><span>{{ 'Floor' }}</span>: {{ room_rental.floor }} </p>
+        <p><span>{{ 'Connecting room'}}</span>: {{ room_rental.connecting ? 'Yes':'No' }}</p>
+        <p><span>{{ 'Roomate in the room'}}</span>: {{ room_rental.roommate ? 'Yes':'No' }}</p>
+        <p><span>{{ 'Furnished' }}</span>: {{ room_rental.furnished ? 'Yes':'No' }} </p>
+        <p><span>{{ 'Smoker' }}</span>: {{ room_rental.smoker ? 'Yes':'No' }} </p>
+        <p><span>{{ 'Pets' }}</span>: {{ room_rental.pets ? 'Yes':'No' }} </p>
+    </div>
+    <div class="space"></div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

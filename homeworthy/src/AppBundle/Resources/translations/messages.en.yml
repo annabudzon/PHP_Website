@@ -1,0 +1,3 @@
+'Invalid credentials.': 'Your username or password are incorrect.'
+'The presented password is invalid.': 'Password is incorrect.'
+'The presented password cannot be empty.': 'Password field cannot be empty.'

@@ -30,12 +30,12 @@ class Rooms_number
     private $rooms_number;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_rental", mappedBy="rooms_number", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatRent", mappedBy="rooms_number", cascade={"all", "remove"})
      */
     private $flats_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_sale", mappedBy="rooms_number", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatSale", mappedBy="rooms_number", cascade={"all", "remove"})
      */
     private $flats_sale;
 
@@ -109,4 +109,8 @@ class Rooms_number
         $this->flats_sale = $flats_sale;
     }
 
+    public function __toString()
+    {
+        return $this->rooms_number;
+    }
 }

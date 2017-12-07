@@ -30,17 +30,17 @@ class Owner_type
     private $owner_type;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Room_rental", mappedBy="owner_type", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\RoomRent", mappedBy="owner_type", cascade={"all", "remove"})
      */
     private $rooms_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_rental", mappedBy="owner_type", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatRent", mappedBy="owner_type", cascade={"all", "remove"})
      */
     private $flats_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_sale", mappedBy="owner_type", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatSale", mappedBy="owner_type", cascade={"all", "remove"})
      */
     private $flats_sale;
 
@@ -99,5 +99,10 @@ class Owner_type
         $this->owners = $owners;
     }
 
+
+    public function __toString()
+    {
+        return $this->owner_type;
+    }
 
 }

@@ -1,6 +1,20 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-</div>
+{% block content %}
+    <div class = "content">
+        <h2>Your account</h2>
+        <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+        <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+        <p>{{ 'Phone Number'}}: {{ user.phone_nr }}</p>
+        <p>{{ 'Registration Date '}}:{{ user.registration_date|date(" m/d/Y H:i:s") }}
+        <p>{{ 'Last Login'}} :{{ user.last_login|date(" m/d/Y H:i:s") }}
+        <ul>
+            <li><a class="btn" href="{{ path('fos_user_profile_edit') }}">Edit profil</a></li>
+            <li><a class="btn" href="{{ path('fos_user_change_password') }}">Change password</a></li>
+            <li><a class="btn" href="{{ path('add') }}">Add new offer</a></li>
+            <li><a class="btn" href="{{ path('offers') }}">Check your offers</a></li>
+            <li><a class="btn" href="{{ path('fos_user_profile_show', {'id' : app.user.getId()})}}">Delete account</a></li>
+        </ul>
+    </div>
+{% endblock %}
+

@@ -53,17 +53,17 @@ class Localization
     //private $map;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Room_rental", mappedBy="localization", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\RoomRent", mappedBy="localization", cascade={"persist","all", "remove"})
      */
     private $rooms_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_rental", mappedBy="localization", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatRent", mappedBy="localization", cascade={"persist","all", "remove"})
      */
     private $flats_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_sale", mappedBy="localization", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatSale", mappedBy="localization", cascade={"persist","all", "remove"})
      */
     private $flats_sale;
 
@@ -200,6 +200,11 @@ class Localization
     public function setFlatsSale($flats_sale)
     {
         $this->flats_sale = $flats_sale;
+    }
+
+    public function __toString()
+    {
+        return "City (".$this->city.")   Country (".$this->country.")   District (".$this->district.")   Street (".$this->street.")";
     }
 
 

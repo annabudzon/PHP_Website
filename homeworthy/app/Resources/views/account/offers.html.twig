@@ -1,0 +1,74 @@
+{% extends "base_sign.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Your offers{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/user_account.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <div class = "content">
+        <div class="container">
+            <h2>Your offers</h2>
+            {% if rooms_rent %}
+                {% for room in rooms_rent %}
+                    <div class="short">
+                        <ul>
+                            <h1>{{ room.title }}</h1>
+                            <li>{{ 'Type of property' }}: {{room.propertyType }}</li>
+                            <li>{{ 'Localization' }}: {{ room.localization }}</li>
+                            <li>{{ 'Publicated' }}: {{ room.date|date(" m/d/Y  H:i:s") }}</li>
+                            <li>{{ 'Total price' }}: {{ room.totalPrice }}</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if flats_sale %}
+                {% for flat in flats_sale %}
+                    <div class="short">
+                        <ul>
+                            <h1>{{ flat.title }}</h1>
+                            <li>{{ 'Type of property' }}: {{ flat.propertyType }}</li>
+                            <li>{{ 'Localization' }}: {{ flat.localization }}</li>
+                            <li>{{ 'Publicated' }}: {{ flat.date|date(" m/d/Y  H:i:s") }}</li>
+                            <li>{{ 'Total price' }}: {{ flat.totalPrice }}</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if flats_rent %}
+                {% for flat in flats_rent %}
+                    <div class="short">
+                        <ul>
+                            <h1>{{ flat.title }}</h1>
+                            <li>{{ 'Localization' }}: {{ 'Type of property' }}: {{ flat.propertyType }}</li>
+                            <li>{{ flat.localization }}</li>
+                            <li>{{ 'Publicated' }}: {{ flat.date|date(" m/d/Y  H:i:s") }}</li>
+                            <li>{{ 'Total price' }}: {{ flat.totalPrice }}</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+                {% endif %}
+
+            {% if not flats_rent and not flats_sale and not rooms_rent %}
+                <div class="empty">
+                <h1 class="empty-data">{{ 'Nothing to display! Add new offer: ' }}</h1>
+                <a href="{{ '/add' }}" class="add-offer">Add offer</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}

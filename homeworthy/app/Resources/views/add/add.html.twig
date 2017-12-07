@@ -13,26 +13,17 @@
 {% endblock %}
 
 {% block content %}
-    <div class = "content">
-        <h2>Add Offer</h2>
+    <div class="wrapper">
+        <div class = "content">
+            <h2>Choose type of offer</h2>
 
-        <form>
-            <div class="container">
-                <label>Title</label>
-                <input type="text" placeholder="Enter Title" name="title" required>
-
-                <label>Descriprion</label>
-                <textarea name="description" placeholder="Enter Description" cols="40" rows="5"></textarea>
-
+            <div class="nav">
+                <ul>
+                    <li><a href="{{ path('add_room') }}">Room for rent</a></li>
+                    <li><a href="{{ path('add_flat_rent') }}">Flat for rent</a></li>
+                    <li><a href="{{ path('add_flat_sale') }}">Flat for sale</a></li>
+                </ul>
             </div>
-
-            <div class="clearfix">
-                <button type="button" class="cancelbtn">Cancel</button>
-                <button type="add" class="addbtn">Add</button>
-            </div>
-        </form>
-        <div class = "register">
-
         </div>
     </div>
 {% endblock %}

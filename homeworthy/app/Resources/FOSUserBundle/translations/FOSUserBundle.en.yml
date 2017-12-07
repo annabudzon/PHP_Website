@@ -21,6 +21,9 @@ profile:
     show:
         username: Username
         email: Email
+        phone_nr: Phone Number
+        registration_date: Registration Date
+        login_date: Last Login
     edit:
         submit: Update
     flash:

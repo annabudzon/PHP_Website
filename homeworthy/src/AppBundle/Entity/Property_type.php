@@ -30,17 +30,17 @@ class Property_type
     private $property;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Room_rental", mappedBy="property_type", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\RoomRent", mappedBy="property_type", cascade={"all", "remove"})
      */
     private $rooms_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_rental", mappedBy="property_type", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatRent", mappedBy="property_type", cascade={"all", "remove"})
      */
     private $flats_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flat_sale", mappedBy="property_type", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatSale", mappedBy="property_type", cascade={"all", "remove"})
      */
     private $flats_sale;
 
@@ -129,6 +129,11 @@ class Property_type
     public function setFlatsSale($flats_sale)
     {
         $this->flats_sale = $flats_sale;
+    }
+
+    public function __toString()
+    {
+        return $this->property;
     }
 
 }

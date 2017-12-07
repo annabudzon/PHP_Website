@@ -30,7 +30,7 @@ class Tenants_number
     private $tenants_number;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Room_rental", mappedBy="tenants_number", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\RoomRent", mappedBy="tenants_number", cascade={"all", "remove"})
      */
     private $rooms_rental;
 
@@ -87,5 +87,9 @@ class Tenants_number
         $this->rooms_rental = $rooms_rental;
     }
 
+    public function __toString()
+    {
+        return "".$this->tenants_number;
+    }
 
 }

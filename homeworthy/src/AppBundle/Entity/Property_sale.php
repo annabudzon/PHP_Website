@@ -33,7 +33,7 @@ abstract class Property_sale
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $date_r;
+    protected $date;
 
     /**
      * @ORM\Column(type="float")
@@ -60,15 +60,13 @@ abstract class Property_sale
     protected $available;
 
     /**
+     * @ORM\Column(type="date")
+     */
+    protected $renovation;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     protected $furnished;
 
-    /**
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank(message="Please, upload image.")
-     * @Assert\Image()
-     */
-    protected $plan;
 }

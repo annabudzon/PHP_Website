@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Homeworthy - About us{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/show.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class = "content">
+            {% if status == true %}
+                <p class="success">Added successfully!</p>
+            {% endif %}
+            <h2>{{ flat_rent.title }}</h2>
+
+            <p><span>{{ 'Publicated' }}</span>: {{ flat_rent.date|date(" m/d/Y H:i:s") }}</p>
+            <p><span>{{ 'Type of property'}}</span>: {{ flat_rent.propertyType }}
+            <p><span>{{ 'Owner type'}}</span>: {{ flat_rent.ownerType }}
+            <p><span>{{ 'Owner '}}</span>: {{ flat_rent.user }}
+            <p><span>{{ 'Description' }}</span>: {{ flat_rent.description ? 'Yes':'No' }}</p>
+            <p><span>{{ 'Available from'}}</span>: {{ flat_rent.available|date(" m/d/Y")}}</p>
+            <p><span>{{ 'Localization'}}</span>: {{ flat_rent.localization }} </p>
+            <p><span>{{ 'Building '}}</span>: {{ flat_rent.building }}</p>
+            <p><span>{{ 'Rooms number '}}</span>: {{ flat_rent.roomsNumber|trans }}
+            <p><span>{{ 'Flatmate'}}</span>: {{ flat_rent.flatmate ? 'Yes':'No' }}</p>
+            <p><span>{{ 'Size'}}</span>: {{ flat_rent.size }}</p>
+            <p><span>{{ 'Last renovation'}}</span>: {{ flat_rent.renovation|date(" m/d/Y")}} </p>
+            <p><span>{{ 'Rent price' }}</span>: {{ flat_rent.rentPrice }} </p>
+            <p><span>{{ 'Owner price' }}</span>: {{ flat_rent.ownerPrice }} </p>
+            <p><span>{{ 'Media price' }}</span>: {{ flat_rent.mediaPrice }} </p>
+            <p><span>{{ 'Advance' }}</span>: {{ flat_rent.advance }} </p>
+            <p><span>{{ 'Total price' }}</span>: {{ flat_rent.totalPrice }} </p>
+            <p><span>{{ 'Floor' }}</span>: {{ flat_rent.floor }} </p>
+            <p><span>{{ 'Children'}}</span>: {{ flat_rent.children ? 'Yes':'No' }}</p>
+            <p><span>{{ 'Furnished' }}</span>: {{ flat_rent.furnished ? 'Yes':'No' }} </p>
+            <p><span>{{ 'Smoker' }}</span>: {{ flat_rent.smoker ? 'Yes':'No' }} </p>
+            <p><span>{{ 'Pets' }}</span>: {{ flat_rent.pets ? 'Yes':'No' }} </p>
+        </div>
+        <div class="space"></div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
