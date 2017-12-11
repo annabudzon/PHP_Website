@@ -204,7 +204,10 @@ class Localization
 
     public function __toString()
     {
-        return "City (".$this->city.")   Country (".$this->country.")   District (".$this->district.")   Street (".$this->street.")";
+        return "City: ".$this->city." 
+         Country: ".$this->country." 
+         District: ".$this->district."
+         Street: ".$this->street."";
     }
 
 

@@ -16,7 +16,7 @@
 .content {
     position: absolute;
     top: 100px;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.55);
     border-radius: 6px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     width: 60%;
@@ -25,6 +25,9 @@
     z-index: 10;
 }
 
+.content.choose-offer{
+    height: 320px;
+}
 
 h2{
     font-family: "Passion One", cursive;
@@ -90,6 +93,7 @@ input:focus{
 
 button, .addbtn {
     font-size: 20px;
+    font-weight: bold;
     background-color: #170b15;
     color: #E8E8E8;
     padding-top: 8px;
@@ -110,6 +114,7 @@ button:hover, .addbtn:hover{
 }
 
 .cancelbtn {
+    font-weight: bold;
     width: 30%;
     height: 60px;
     font-size: 20px;

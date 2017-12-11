@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Ania
- * Date: 2017-10-15
- * Time: 22:46
+ * Date: 2017-12-09
+ * Time: 16:53
  */
 
 namespace AppBundle\Entity;
@@ -13,42 +13,41 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="property_type")
+ * @ORM\Table(name="offer_type")
  */
-class Property_type
+class Offer_type
 {
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id_property_type;
+    private $id_offer_type;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $property;
+    private $offer;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OffersSearcher", mappedBy="property", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OffersSearcher", mappedBy="offer", cascade={"all", "remove"})
      */
     private $searcher;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\RoomRent", mappedBy="property_type", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\RoomRent", mappedBy="offer_type", cascade={"all", "remove"})
      */
     private $rooms_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatRent", mappedBy="property_type", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatRent", mappedBy="offer_type", cascade={"all", "remove"})
      */
     private $flats_rental;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatSale", mappedBy="property_type", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatSale", mappedBy="offer_type", cascade={"all", "remove"})
      */
     private $flats_sale;
-
 
     public function __construct()
     {
@@ -59,35 +58,35 @@ class Property_type
     }
 
     /**
+     * @return integer
+     */
+    public function getIdOfferType()
+    {
+        return $this->id_offer_type;
+    }
+
+    /**
+     * @param mixed $id_offer_type
+     */
+    public function setIdOfferType($id_offer_type)
+    {
+        $this->id_offer_type = $id_offer_type;
+    }
+
+    /**
      * @return mixed
      */
-    public function getIdPropertyType()
+    public function getOffer()
     {
-        return $this->id_property_type;
+        return $this->offer;
     }
 
     /**
-     * @param mixed $id_property_type
+     * @param mixed $offer
      */
-    public function setIdPropertyType($id_property_type)
+    public function setOffer($offer)
     {
-        $this->id_property_type = $id_property_type;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProperty()
-    {
-        return $this->property;
-    }
-
-    /**
-     * @param mixed $property_type
-     */
-    public function setProperty($property_type)
-    {
-        $this->property= $property_type;
+        $this->offer = $offer;
     }
 
     /**
@@ -138,9 +137,10 @@ class Property_type
         $this->flats_sale = $flats_sale;
     }
 
+
     public function __toString()
     {
-        return $this->property;
+        return $this->offer;
     }
 
     /**
@@ -158,5 +158,6 @@ class Property_type
     {
         $this->searcher = $searcher;
     }
+
 
 }

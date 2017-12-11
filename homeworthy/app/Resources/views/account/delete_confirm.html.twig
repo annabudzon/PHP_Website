@@ -1,7 +1,7 @@
 {% extends "base_sign.html.twig" %}
 {% block head %}
     {{ parent() }}
-    <title>{% block title %}Sign up{% endblock %}</title>
+    <title>{% block title %}DELETE ACCOUNT{% endblock %}</title>
     {% block stylesheets %}
         {{ parent() }}
         <link rel="stylesheet" href="{{ asset('css/user_account.css') }}" type="text/css"/>
@@ -16,14 +16,16 @@
     <div class = "content">
         <div class="container">
 
-            {{ form_start(delete_form) }}
-            <h2>Delete this account</h2>
-            <p> Are you sure you want to delete '{{ user.username }}'?</p>
+
+            <h2>Delete account</h2>
+            <p> Are you sure you want to delete your account: '{{ user.username }}'?</p>
             <div>
-                <button type="submit" id="proceed" name="proceed" class="delete">Delete</button>
-                <button type="button" class="cancelbtn">Cancel</button>
+                <button onclick="location.href='{{ path('fos_user_profile_show') }}'" type="button" class="delete back" >Cancel</button>
+                {{ form_start(delete_form) }}
+                <button type="submit" class="delete" >Delete</button>
+                {{ form_end(delete_form) }}
             </div>
-            {{ form_end(delete_form) }}
+
         </div>
     </div>
 {% endblock %}

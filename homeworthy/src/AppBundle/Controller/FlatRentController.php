@@ -10,11 +10,13 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\FlatRent;
 use AppBundle\Entity\Localization;
+use AppBundle\Entity\Offer_type;
 use AppBundle\Entity\Property_type;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Ivory\GoogleMap\Map;
 
 /**
  * @Route("flat_rent")
@@ -36,6 +38,7 @@ class FlatRentController extends Controller
         $flat_rental->setLocalization($localization);
         $flat_rental->prePersist();
         $flat_rental->setPropertyType($this->getDoctrine()->getRepository(Property_type::class)->find(1));
+        $flat_rental->setOfferType($this->getDoctrine()->getRepository(Offer_type::class)->find(2));
         $form = $this->createForm('AppBundle\Form\FlatRentType', $flat_rental);
         $form->handleRequest($request);
 
@@ -71,16 +74,32 @@ class FlatRentController extends Controller
      * @param boolean $status
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showFlatRentAction($id, $status = false){
-        if($status == null){
-            $status = false;
-        }
+    public function showFlatRentAction(Request $request, $id){
+        $last_route = $request->headers->get('referer');
 
         $flat_rent = $this->getDoctrine()->getRepository(FlatRent::class)->find($id);
 
         return $this->render('flat_rent/show_frent.html.twig', array(
             'flat_rent' => $flat_rent,
-            'status' => $status
+            'user' =>$this->getUser(),
+            'last_route' => $last_route,
+        ));
+    }
+
+    /**
+     * @Route("/{id}/confirm", name="confirm_delete_flat_rent")
+     * @Method("GET")
+     * @param integer $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function confirmDeleteAction($id){
+        $flat_rent = $this->getDoctrine()->getRepository(FlatRent::class)->find($id);
+
+        $deleteForm = $this->createDeleteForm($flat_rent);
+
+        return $this->render('flat_rent/confirm.html.twig', array(
+            'flat_rent' => $flat_rent,
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -106,6 +125,44 @@ class FlatRentController extends Controller
             'flat_rent' => $flat_rent,
             'edit_form' => $editForm->createView(),
         ));
+    }
+
+    /**
+     * Deletes a project entity.
+     *
+     * @Route("/{id}/delete", name="delete_flat_rent")
+     * @Method("DELETE")
+     * @param Request $request
+     * @param FlatRent $flat_rent
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction(Request $request, FlatRent $flat_rent)
+    {
+        $form = $this->createDeleteForm($flat_rent);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($flat_rent);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('offers');
+    }
+
+    /**
+     * Creates a form to delete a project entity.
+     *
+     * @param FlatRent $flat_rent
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    private function createDeleteForm(FlatRent $flat_rent)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('delete_flat_rent', array('id' => $flat_rent->getIdFlat())))
+            ->setMethod('DELETE')
+            ->getForm();
     }
 
 }

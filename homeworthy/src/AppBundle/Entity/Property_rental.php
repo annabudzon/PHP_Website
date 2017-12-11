@@ -19,13 +19,6 @@ abstract class Property_rental
 {
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-   // private $id_property_rental;
-
-    /**
      * @ORM\Column(type="string", length=100)
      */
     protected $title;

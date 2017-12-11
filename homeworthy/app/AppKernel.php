@@ -17,7 +17,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Vich\UploaderBundle\VichUploaderBundle()
+            new Vich\UploaderBundle\VichUploaderBundle(),
+             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

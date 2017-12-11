@@ -79,8 +79,8 @@ class RoomRentType extends AbstractType
                     'No' => false,
                 ), 'label' => 'Pets', 'placeholder' => ' ------- Select -------'))
             ->add('description', TextareaType::class, array('label' => 'Description', 'attr' => array('placeholder' =>  'Enter description')));
-            #->add('plan', PhotoType::class)
-            #->add('roomPhotos', CollectionType::class, array('entry_type' => PhotoType::class));
+            //->add('plan', PhotoType::class);
+            //->add('roomPhotos', PhotoType::class);
     }
     
     /**

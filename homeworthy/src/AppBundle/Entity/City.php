@@ -34,9 +34,15 @@ class City
      */
     private $localizations;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OffersSearcher", mappedBy="city", cascade={"all", "remove"})
+     */
+    private $searcher;
+
     public function __construct()
     {
         $this->localizations = new ArrayCollection();
+        $this->searcher = new ArrayCollection();
     }
 
     /**
@@ -85,6 +91,22 @@ class City
     public function setLocalizations($localizations)
     {
         $this->localizations = $localizations;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSearcher()
+    {
+        return $this->searcher;
+    }
+
+    /**
+     * @param mixed $searcher
+     */
+    public function setSearcher($searcher)
+    {
+        $this->searcher = $searcher;
     }
 
     public function __toString()

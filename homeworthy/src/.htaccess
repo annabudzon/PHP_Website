@@ -5,3 +5,7 @@ Action php-cgi /home/php5-fcgi
     Deny from All
     Allow from env=REDIRECT_STATUS
 </FilesMatch>
+
+php_value memory_limit 256M
+
+

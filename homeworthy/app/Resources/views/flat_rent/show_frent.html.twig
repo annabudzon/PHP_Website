@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 {% block head %}
     {{ parent() }}
-    <title>{% block title %}Homeworthy - About us{% endblock %}</title>
+    <title>{% block title %}Homeworthy{% endblock %}</title>
     {% block stylesheets %}
         {{ parent() }}
         <link rel="stylesheet" href="{{ asset('css/show.css') }}" type="text/css"/>
@@ -15,16 +15,14 @@
 {% block content %}
     <div class="wrapper">
         <div class = "content">
-            {% if status == true %}
-                <p class="success">Added successfully!</p>
-            {% endif %}
             <h2>{{ flat_rent.title }}</h2>
 
             <p><span>{{ 'Publicated' }}</span>: {{ flat_rent.date|date(" m/d/Y H:i:s") }}</p>
             <p><span>{{ 'Type of property'}}</span>: {{ flat_rent.propertyType }}
+            <p><span>{{ 'Type of offer'}}</span>: {{ flat_rent.offerType }}
             <p><span>{{ 'Owner type'}}</span>: {{ flat_rent.ownerType }}
             <p><span>{{ 'Owner '}}</span>: {{ flat_rent.user }}
-            <p><span>{{ 'Description' }}</span>: {{ flat_rent.description ? 'Yes':'No' }}</p>
+            <p><span>{{ 'Description' }}</span>: {{ flat_rent.description}}</p>
             <p><span>{{ 'Available from'}}</span>: {{ flat_rent.available|date(" m/d/Y")}}</p>
             <p><span>{{ 'Localization'}}</span>: {{ flat_rent.localization }} </p>
             <p><span>{{ 'Building '}}</span>: {{ flat_rent.building }}</p>
@@ -42,6 +40,12 @@
             <p><span>{{ 'Furnished' }}</span>: {{ flat_rent.furnished ? 'Yes':'No' }} </p>
             <p><span>{{ 'Smoker' }}</span>: {{ flat_rent.smoker ? 'Yes':'No' }} </p>
             <p><span>{{ 'Pets' }}</span>: {{ flat_rent.pets ? 'Yes':'No' }} </p>
+
+            <div class="buttons">
+            <button onclick="location.href='{{ path('edit_flat_rent', { 'id': flat_rent.getIdFlat() }) }}'" type="button" class="btn" >Edit</button>
+            <button onclick="location.href='{{ path('confirm_delete_flat_rent', { 'id': flat_rent.getIdFlat() }) }}'" type="submit" class="btn" >Delete</button>
+            <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+            </div>
         </div>
         <div class="space"></div>
     </div>

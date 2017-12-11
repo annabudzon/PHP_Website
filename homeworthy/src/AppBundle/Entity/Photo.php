@@ -16,9 +16,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
- * @ORM\Entity(repositoryClass="PhotoRepository")
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="photo")
- * @Vich\Uploadable
  */
 class Photo
 {
@@ -33,7 +33,6 @@ class Photo
      *@Assert\File(
      *     mimeTypes = {"image/png", "image/jpeg", "image/jpg"},
      *     mimeTypesMessage = "Please upload a valid PDF or valid IMAGE")
-     *@Vich\UploadableField(mapping="offer_image", fileNameProperty="photo_name", size="photo_size")
      *@var File
      *
      */
@@ -46,9 +45,13 @@ class Photo
     private $photo_name;
 
     /**
-     * @ORM\Column(type="integer")
+     * Image path
+     *
+     * @var string
+     *
+     * @ORM\Column(type="text", length=255, nullable=false)
      */
-    private $photo_size;
+    protected $path;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FlatRent", inversedBy="flat_photos")

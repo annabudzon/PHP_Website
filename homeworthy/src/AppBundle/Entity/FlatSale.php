@@ -30,6 +30,12 @@ class FlatSale extends Property_sale
     private $property_type;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Offer_type", inversedBy="flats_sale")
+     * @ORM\JoinColumn(name="id_offer_type", referencedColumnName="id_offer_type")
+     */
+    private $offer_type;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Owner_type", inversedBy="flats_sale")
      * @ORM\JoinColumn(name="id_owner_type", referencedColumnName="id_owner_type")
      */
@@ -462,4 +468,21 @@ class FlatSale extends Property_sale
     {
         return $this->getUserId();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOfferType()
+    {
+        return $this->offer_type;
+    }
+
+    /**
+     * @param mixed $offer_type
+     */
+    public function setOfferType($offer_type)
+    {
+        $this->offer_type = $offer_type;
+    }
+
 }

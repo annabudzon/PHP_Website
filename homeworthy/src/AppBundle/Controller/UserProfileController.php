@@ -12,7 +12,6 @@ use AppBundle\Entity\FlatRent;
 use AppBundle\Entity\FlatSale;
 use AppBundle\Entity\RoomRent;
 use AppBundle\Entity\User;
-use FOS\UserBundle\Doctrine\UserManager;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -38,7 +37,26 @@ class UserProfileController extends Controller
         return $this->render('account/offers.html.twig', array(
             'rooms_rent' => $rooms,
             'flats_sale' => $flats,
-            'flats_rent' => $flatr
+            'flats_rent' => $flatr,
+        ));
+    }
+
+
+    /**
+     * @Route("/{id}/confirm", name="confirm_delete_user")
+     * @Method("GET")
+     * @param integer $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function confirmDeleteAction($id){
+
+        $user = $this->getUser();
+
+        $deleteForm = $this->createDeleteForm($user);
+
+        return $this->render('account/delete_confirm.html.twig', array(
+            'user' => $user,
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -49,38 +67,21 @@ class UserProfileController extends Controller
      * @Route("/delete/{id}", name="user_delete")
      * @Method({"DELETE"})
      * @param Request $request
-     * @param integer $id
+     * @param User $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function deleteUserAction(Request $request, $id){
+    public function deleteUserAction(Request $request, User $user){
 
-        $response = array(
-            'success' => true,
-            'message' => '',
-            'html' => ''
-        );
+        $form = $this->createDeleteForm($user);
+        $form->handleRequest($request);
 
-        $userManager = $this->get('fos_user.user_manager');
-        /* @var $userManager UserManager */
-
-
-        $user= $this->getUser();
-        $username = $user->getUsername();
-
-        $user = $userManager->findUserByUsername($username);
-        if(\is_null($user)) {
-            $response['success'] = false;
-            $response['message'] = 'Sorry, user not found!';
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush();
         }
 
-        \assert(!\is_null($user));
-        $userManager->deleteUser($user);
-
-
-        return $this->render('account/delete_confirm.html.twig', array(
-            'user' => $user,
-            'response' => $response
-        ));
+        return $this->redirectToRoute('homepage');
     }
 
     /**

@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 {% block head %}
     {{ parent() }}
-    <title>{% block title %}Homeworthy - About us{% endblock %}</title>
+    <title>{% block title %}Homeworthy{% endblock %}</title>
     {% block stylesheets %}
         {{ parent() }}
         <link rel="stylesheet" href="{{ asset('css/show.css') }}" type="text/css"/>
@@ -15,13 +15,11 @@
 {% block content %}
     <div class="wrapper">
         <div class = "content">
-            {% if status == 1 %}
-                <p class="success">Added successfully!</p>
-            {% endif %}
             <h2>{{ flat_sale.title }}</h2>
 
             <p><span>{{ 'Publicated' }}</span>: {{ flat_sale.date|date(" m/d/Y H:i:s") }}</p>
             <p><span>{{ 'Type of property'}}</span>: {{ flat_sale.propertyType }}
+            <p><span>{{ 'Type of offer'}}</span>: {{ flat_sale.offerType }}
             <p><span>{{ 'Owner type'}}</span>: {{ flat_sale.ownerType }}
             <p><span>{{ 'Owner '}}</span>: {{ flat_sale.user }}
             <p><span>{{ 'Description' }}</span>: {{ flat_sale.description ? 'Yes':'No' }}</p>
@@ -38,6 +36,13 @@
             <p><span>{{ 'Furnished' }}</span>: {{ flat_sale.furnished ? 'Yes':'No' }} </p>
             <p><span>{{ 'Balcony' }}</span>: {{ flat_sale.balcony ? 'Yes':'No' }} </p>
 
+            <div class="buttons">
+                <button onclick="location.href='{{ path('edit_flat_sale', { 'id': flat_sale.getIdFlat() }) }}'" type="button" class="btn" >Edit</button>
+                <button onclick="location.href='{{ path('confirm_delete_flat_sale', { 'id': flat_sale.getIdFlat() }) }}'" type="submit" class="btn" >Delete</button>
+                {% set referer = app.request.server.get('HTTP_REFERER')|default('/') %}
+                <input type="hidden" name="_target_path" value="{{ referer }}" />
+                <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+            </div>
         </div>
         <div class="space"></div>
     </div>

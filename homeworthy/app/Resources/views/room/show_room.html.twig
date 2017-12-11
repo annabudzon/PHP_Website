@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 {% block head %}
     {{ parent() }}
-    <title>{% block title %}Homeworthy - About us{% endblock %}</title>
+    <title>{% block title %}Homeworthy{% endblock %}</title>
     {% block stylesheets %}
         {{ parent() }}
         <link rel="stylesheet" href="{{ asset('css/show.css') }}" type="text/css"/>
@@ -15,13 +15,11 @@
 {% block content %}
 <div class="wrapper">
     <div class = "content">
-        {% if status == true %}
-            <p class="success">Added successfully!</p>
-        {% endif %}
         <h2>{{ room_rental.title }}</h2>
 
         <p><span>{{ 'Publicated' }}</span>: {{ room_rental.date|date(" m/d/Y H:i:s") }}</p>
         <p><span>{{ 'Type of property'}}</span>: {{ room_rental.propertyType }}
+        <p><span>{{ 'Type of offer'}}</span>: {{ room_rental.offerType }}
         <p><span>{{ 'Owner type'}}</span>: {{ room_rental.ownerType }}
         <p><span>{{ 'Owner '}}</span>: {{ room_rental.user }}
         <p><span>{{ 'Description' }}</span>: {{ room_rental.description ? 'Yes':'No' }}</p>
@@ -42,6 +40,12 @@
         <p><span>{{ 'Furnished' }}</span>: {{ room_rental.furnished ? 'Yes':'No' }} </p>
         <p><span>{{ 'Smoker' }}</span>: {{ room_rental.smoker ? 'Yes':'No' }} </p>
         <p><span>{{ 'Pets' }}</span>: {{ room_rental.pets ? 'Yes':'No' }} </p>
+
+        <div class="buttons">
+            <button onclick="location.href='{{ path('edit_room', { 'id': room_rental.getIdRoom() }) }}'" type="button" class="btn" >Edit</button>
+            <button onclick="location.href='{{ path('confirm_delete_room', { 'id': room_rental.getIdRoom() }) }}'" type="button" class="btn" >Delete</button>
+            <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+        </div>
     </div>
     <div class="space"></div>
 </div>
