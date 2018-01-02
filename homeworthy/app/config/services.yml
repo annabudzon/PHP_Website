@@ -34,8 +34,28 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
+    AppBundle\Service\FileUploader:
+            arguments:
+              $targetDir: '%kernel.root_dir%/web/uploads/images'
+
+    AppBundle\EventListener\PhotosUploadListener:
+            tags:
+                - { name: doctrine.event_listener, event: prePersist }
+                - { name: doctrine.event_listener, event: preUpdate }
+
     app.form.registration:
             class: AppBundle\Form\RegistrationType
             tags:
                 - { name: form.type, alias: app_user_registration }
+
+    sonata.media.provider.custom:
+              class: Application\Sonata\MediaBundle\Provider\MediaProvider
+              tags:
+                  - { name: sonata.media.provider }
+              arguments:
+                  - sonata.media.provider.custom
+                  - "@sonata.media.filesystem.local"
+                  - "@sonata.media.cdn.server"
+                  - "@sonata.media.generator.default"
+                  - "@sonata.media.thumbnail.format"
 

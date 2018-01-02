@@ -277,7 +277,7 @@ class User extends BaseUser
 
     public function __toString()
     {
-        return $this->username." (email: ".$this->email.")";
+        return $this->username." (email: ".$this->email.", phone number: ".$this->phone_nr.")";
     }
 
 

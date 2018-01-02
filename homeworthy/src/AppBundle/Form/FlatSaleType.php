@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Entity\Building;
@@ -60,9 +61,29 @@ class FlatSaleType extends AbstractType
                 'choice_label' => 'building_type',
                 'label' => 'Type of Building', 'placeholder' => ' ------- Select -------'))
             ->add('renovation', DateType::class, array('label' => 'Last Renovation', 'placeholder' => '---- Select ----'))
-            ->add('description', TextareaType::class, array('label' => 'Description', 'attr' => array('placeholder' =>  'Enter description')));
-            #->add('plan', CollectionType::class, array('entry_type' => PhotoType::class, 'entry_options' => array('label' => false)))
-            #->add('flatPhotos', CollectionType::class, array('entry_type' => PhotoType::class, 'entry_options' => array('label' => false)));
+            ->add('description', TextareaType::class, array('label' => 'Description', 'attr' => array('placeholder' =>  'Enter description')))
+            ->add('plan', 'sonata_media_type', array(
+                'label' => 'Plan',
+                'provider' => 'sonata.media.provider.image',
+                'context'  => 'images',
+                'required' => true))
+            ->add('mainPhoto', 'sonata_media_type', array(
+                'label' => 'Main Photo',
+                'provider' => 'sonata.media.provider.image',
+                'context'  => 'images',
+                'required' => true));
+            /*->add('flatPhotos', CollectionType::class, array(
+                'entry_type' => 'sonata_media_type',
+                'entry_options' => array(
+                    'label' => false,
+                    'provider' => 'sonata.media.provider.image',
+                    'context'  => 'images',),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'prototype' => true,
+                'required' => false,
+            ));*/
     }
     
     /**

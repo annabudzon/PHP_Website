@@ -19,13 +19,19 @@
             <div class="container">
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
-                <ul>
-                    {#% for photo in form.roomPhotos%#}
-                    <!--- <li>
-                            {#% include '@VichUploader/Form/fields.html.twig' %#}
-                        </li>--->
-                    {#% endfor %#}
-                </ul>
+                {{ form_widget(form.plan) }}
+
+                <!---<ul id="photos-fields-list" class="collection-container"
+                    data-prototype="{form_widget(form.flatPhotos.vars.prototype)|e }}">
+                {#% for photo in form.flatPhotos %}
+                    <li>
+                        {{ form_widget(photo) }}
+                    </li>
+                {% endfor %#}
+                </ul>--->
+
+                <a href="#" id="add-another-photo" class="collection-add">Add another photo</a>
+
                 <div class="clearfix">
                     <a href="{{ path('add') }}" name="cancel" class="cancelbtn">Cancel</a>
                     <input type="submit" class="addbtn" value="Create" />

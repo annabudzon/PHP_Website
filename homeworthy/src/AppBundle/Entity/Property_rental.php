@@ -34,7 +34,7 @@ abstract class Property_rental
     protected $size;
 
     /**
-     * @ORM\Column(type="string", length=200)
+     * @ORM\Column(type="string", length=600)
      */
     protected $description;
 

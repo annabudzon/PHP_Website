@@ -1,0 +1,19 @@
+{% extends 'SonataMediaBundle:Form:media_widgets.html.twig' %}
+{% block sonata_media_type_widget %}
+    <div class="row">
+        <div class="col-md-3 pull-left">
+            {% if value is not empty and value.providerReference %}
+                <strong>{{ 'widget_label_type'|trans({}, 'SonataMediaBundle') }}:</strong> <span type="label">{{ value.providerName|trans({}, 'SonataMediaBundle') }}</span>
+                <br />
+                <strong>{{ 'widget_label_context'|trans({}, 'SonataMediaBundle') }}:</strong> <span type="label">{{ value.context|trans({}, 'SonataMediaBundle') }}</span>
+            {% else %}
+                <strong>{{ 'widget_label_type'|trans({}, 'SonataMediaBundle') }}:</strong> <span type="label">{{ form.vars['provider']|trans({}, 'SonataMediaBundle') }}</span>
+                <br />
+                <strong>{{ 'widget_label_context'|trans({}, 'SonataMediaBundle') }}:</strong> <span type="label">{{ form.vars['context']|trans({}, 'SonataMediaBundle') }}</span>
+            {% endif %}
+        </div>
+        <div class="col-md-2 pull-left">
+            {{ block('form_widget') }}
+        </div>
+    </div>
+{% endblock sonata_media_type_widget %}

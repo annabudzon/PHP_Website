@@ -16,13 +16,14 @@
     <div class="wrapper">
         <div class = "content">
             <h2>{{ flat_sale.title }}</h2>
-
+            <p><div class="image">{% media flat_sale.plan, 'big' %}</div></p>
+            <p><div class="image">{% media flat_sale.mainPhoto, 'big' %}</div></p>
             <p><span>{{ 'Publicated' }}</span>: {{ flat_sale.date|date(" m/d/Y H:i:s") }}</p>
             <p><span>{{ 'Type of property'}}</span>: {{ flat_sale.propertyType }}
             <p><span>{{ 'Type of offer'}}</span>: {{ flat_sale.offerType }}
             <p><span>{{ 'Owner type'}}</span>: {{ flat_sale.ownerType }}
             <p><span>{{ 'Owner '}}</span>: {{ flat_sale.user }}
-            <p><span>{{ 'Description' }}</span>: {{ flat_sale.description ? 'Yes':'No' }}</p>
+            <p><span>{{ 'Description' }}</span>: {{ flat_sale.description }}</p>
             <p><span>{{ 'Available from'}}</span>: {{ flat_sale.available|date(" m/d/Y")}}</p>
             <p><span>{{ 'Localization'}}</span>: {{ flat_sale.localization }} </p>
             <p><span>{{ 'Building '}}</span>: {{ flat_sale.building }}</p>
@@ -37,11 +38,17 @@
             <p><span>{{ 'Balcony' }}</span>: {{ flat_sale.balcony ? 'Yes':'No' }} </p>
 
             <div class="buttons">
-                <button onclick="location.href='{{ path('edit_flat_sale', { 'id': flat_sale.getIdFlat() }) }}'" type="button" class="btn" >Edit</button>
-                <button onclick="location.href='{{ path('confirm_delete_flat_sale', { 'id': flat_sale.getIdFlat() }) }}'" type="submit" class="btn" >Delete</button>
-                {% set referer = app.request.server.get('HTTP_REFERER')|default('/') %}
-                <input type="hidden" name="_target_path" value="{{ referer }}" />
-                <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+                {% if app.user %}
+                    {% if (is_granted('ROLE_ADMIN') or (flat_sale.user == app.user)) %}
+                        <button onclick="location.href='{{ path('edit_flat_sale', { 'id': flat_sale.getIdFlat() }) }}'" type="button" class="btn" >Edit</button>
+                        <button onclick="location.href='{{ path('confirm_delete_flat_sale', { 'id': flat_sale.getIdFlat() }) }}'" type="submit" class="btn" >Delete</button>
+                        <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+                    {% else %}
+                        <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+                    {% endif %}
+                {% else %}
+                    <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+                {% endif %}
             </div>
         </div>
         <div class="space"></div>

@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Building;
 use AppBundle\Entity\Owner_type;
 use AppBundle\Entity\Tenants_number;
+use Application\Sonata\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -67,7 +68,9 @@ class RoomRentType extends AbstractType
                 'class' => Building::class,
                 'choice_label' => 'building_type',
                 'label' => 'Type of Building', 'placeholder' => ' ------- Select -------'))
-            ->add('renovation', DateType::class, array('label' => 'Last Renovation', 'placeholder' => ' ---- Select ----'))
+            ->add('renovation', DateType::class, array(
+                'label' => 'Last Renovation',
+                'placeholder' => ' ---- Select ----'))
             ->add('smoker', ChoiceType::class, array(
                 'choices'  => array(
                     'Yes' => true,
@@ -78,9 +81,32 @@ class RoomRentType extends AbstractType
                     'Yes' => true,
                     'No' => false,
                 ), 'label' => 'Pets', 'placeholder' => ' ------- Select -------'))
-            ->add('description', TextareaType::class, array('label' => 'Description', 'attr' => array('placeholder' =>  'Enter description')));
-            //->add('plan', PhotoType::class);
-            //->add('roomPhotos', PhotoType::class);
+            ->add('description', TextareaType::class, array('label' => 'Description', 'attr' => array('placeholder' =>  'Enter description')))
+            ->add('plan','sonata_media_type', array(
+                'label' => 'Apartment plan',
+                'provider' => 'sonata.media.provider.image',
+                'context'  => 'images',
+                'required' => true))
+            ->add('mainPhoto', 'sonata_media_type', array(
+                'label' => 'Main Photo',
+                'provider' => 'sonata.media.provider.image',
+                'context'  => 'images',
+                'required' => true));
+            /*->add('roomPhotos',CollectionType::class, array(
+                'entry_type' => 'sonata_media_type',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'by_reference' => false,
+                'entry_options' => array(
+                    'label' => false,
+                    'provider' => 'sonata.media.provider.image',
+                    'context'  => 'images',
+                    'required' => true
+                )
+                ));*/
+
+
     }
     
     /**

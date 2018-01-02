@@ -22,6 +22,7 @@
             <div>
                 <button onclick="location.href='{{ path('fos_user_profile_show') }}'" type="button" class="delete back" >Cancel</button>
                 {{ form_start(delete_form) }}
+                <div class="image">{% media room.mainPhoto, 'small' %}</div>
                 <button type="submit" class="delete" >Delete</button>
                 {{ form_end(delete_form) }}
             </div>

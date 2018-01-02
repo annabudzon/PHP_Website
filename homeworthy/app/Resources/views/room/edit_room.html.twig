@@ -19,13 +19,6 @@
             <div class="container">
                 {{ form_start(edit_form) }}
                 {{ form_widget(edit_form) }}
-                <ul>
-                    {#% for photo in form.roomPhotos%#}
-                    <!--- <li>
-                            {#% include '@VichUploader/Form/fields.html.twig' %#}
-                        </li>--->
-                    {#% endfor %#}
-                </ul>
 
                 <div class="clearfix">
                     <a href="{{ path('offers') }}" name="cancel" class="cancelbtn">Cancel</a>

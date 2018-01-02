@@ -8,8 +8,11 @@
 
 namespace AppBundle\Entity;
 
+use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Sonata\MediaBundle\Model\GalleryInterface;
+use Sonata\MediaBundle\Model\MediaInterface;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RoomRentRepository")
@@ -68,15 +71,31 @@ class RoomRent extends  Property_rental
     private $tenants_number;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Photo", mappedBy="room_rental", cascade={"all", "remove"})
+     *
+     * @var RoomHasPhotos
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\RoomHasPhotos", mappedBy="room_rental", cascade={"persist"}, fetch="LAZY")
+     * })
      */
     private $room_photos;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Photo", inversedBy="room_rental_plan")
-     * @ORM\JoinColumn(name="id_photo", referencedColumnName="id_photo", onDelete="CASCADE")
+     *  @var \Application\Sonata\MediaBundle\Entity\Media
+     *
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="plan", referencedColumnName="id")
+     *
      */
     private $plan;
+
+    /**
+     *  @var \Application\Sonata\MediaBundle\Entity\Media
+     *
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="mainPhoto", referencedColumnName="id")
+     *
+     */
+    private $main_photo;
 
     /**
      * @ORM\Column(type="boolean")
@@ -91,6 +110,46 @@ class RoomRent extends  Property_rental
     public function __construct()
     {
         $this->room_photos = new ArrayCollection();
+    }
+
+    /**
+     * Add photo
+     *
+     * @param Media $photo
+     * @return RoomRent
+     */
+    public function addRoomPhoto(Media $photo)
+    {
+        $this->room_photos->add($photo);
+
+        return $this;
+
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param Media $photo
+     */
+    public function removeRoomPhoto(Media $photo)
+    {
+        $this->room_photos->removeElement($photo);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMainPhoto()
+    {
+        return $this->main_photo;
+    }
+
+    /**
+     * @param mixed $main_photo
+     */
+    public function setMainPhoto($main_photo)
+    {
+        $this->main_photo = $main_photo;
     }
 
     /**
@@ -472,21 +531,6 @@ class RoomRent extends  Property_rental
         $this->roommate = $roommate;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPlan()
-    {
-        return $this->plan;
-    }
-
-    /**
-     * @param mixed $plan
-     */
-    public function setPlan($plan)
-    {
-        $this->plan = $plan;
-    }
 
     /**
      * @return mixed
@@ -504,45 +548,7 @@ class RoomRent extends  Property_rental
         $this->owner_type = $owner_type;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getRoomPhotos()
-    {
-        return $this->room_photos;
-    }
 
-    /**
-     * @param mixed $room_photos
-     */
-    public function setRoomPhotos($room_photos)
-    {
-        $this->room_photos = $room_photos;
-    }
-
-    /**
-     * Add photo
-     *
-     * @param Photo $photo
-     *
-     * @return RoomRent
-     */
-    public function addPhoto(Photo $photo)
-    {
-        $this->room_photos[] = $photo;
-
-        return $this;
-    }
-
-    /**
-     * Remove photo
-     *
-     * @param Photo $photo
-     */
-    public function removePhoto(Photo $photo)
-    {
-        $this->room_photos->removeElement($photo);
-    }
 
     /**
      * @param mixed $localization
@@ -561,14 +567,6 @@ class RoomRent extends  Property_rental
     }
 
     /**
-     * @return integer
-     */
-    public function getUserId()
-    {
-        return $this->getUserId();
-    }
-
-    /**
      * @return mixed
      */
     public function getOfferType()
@@ -584,5 +582,36 @@ class RoomRent extends  Property_rental
         $this->offer_type = $offer_type;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getRoomPhotos()
+    {
+        return $this->room_photos;
+    }
+
+    /**
+     * @param ArrayCollection $room_photos
+     */
+    public function setRoomPhotos($room_photos)
+    {
+        $this->room_photos = $room_photos;
+    }
+
+    /**
+     * @return MediaInterface
+     */
+    public function getPlan()
+    {
+        return $this->plan;
+    }
+
+    /**
+     * @param MediaInterface  $plan
+     */
+    public function setPlan($plan)
+    {
+        $this->plan = $plan;
+    }
 
 }

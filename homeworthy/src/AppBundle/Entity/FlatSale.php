@@ -8,6 +8,8 @@
 
 namespace AppBundle\Entity;
 
+use Application\Sonata\MediaBundle\Entity\Gallery;
+use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -66,16 +68,32 @@ class FlatSale extends Property_sale
     private $rooms_number;
 
     /**
+     * @var FlatSaleHasPhotos
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Photo", mappedBy="flat_sale", cascade={"all", "remove"})
+    * @ORM\OneToMany(targetEntity="AppBundle\Entity\FlatSaleHasPhotos", mappedBy="flat_sale", cascade={"persist"}, fetch="LAZY")
+     *
      */
     private $flat_photos;
 
+
     /**
+     *  @var \Application\Sonata\MediaBundle\Entity\Media
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Photo", mappedBy="flat_sale", cascade={"all", "remove"})
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="plan", referencedColumnName="id")
+     *
      */
     private $plan;
+
+    /**
+     *  @var \Application\Sonata\MediaBundle\Entity\Media
+     *
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="mainPhoto", referencedColumnName="id")
+     *
+     */
+    private $main_photo;
+
 
     /**
      * @ORM\Column(type="boolean")
@@ -95,7 +113,30 @@ class FlatSale extends Property_sale
     public function __construct()
     {
         $this->flat_photos = new ArrayCollection();
-        $this->plan = new ArrayCollection();
+    }
+
+    /**
+     * Add photo
+     *
+     * @param Media $photo
+     * @return FlatSale
+     */
+    public function addFlatPhoto(Media $photo)
+    {
+        $this->flat_photos->add($photo);
+
+        return $this;
+
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param Photo $photo
+     */
+    public function removeFlatPhoto(Photo $photo)
+    {
+        $this->flat_photos->removeElement($photo);
     }
 
     /**
@@ -287,7 +328,7 @@ class FlatSale extends Property_sale
      */
     public function setDate($date)
     {
-        $this->dat = $date;
+        $this->date = $date;
     }
 
     /**
@@ -430,7 +471,7 @@ class FlatSale extends Property_sale
     }
 
     /**
-     * @return mixed
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFlatPhotos()
     {
@@ -438,7 +479,7 @@ class FlatSale extends Property_sale
     }
 
     /**
-     * @param mixed $flat_photos
+     * @param \Doctrine\Common\Collections\Collection $flat_photos
      */
     public function setFlatPhotos($flat_photos)
     {
@@ -454,19 +495,11 @@ class FlatSale extends Property_sale
     }
 
     /**
-     * @param mixed $plan
+     * @param string $plan
      */
     public function setPlan($plan)
     {
         $this->plan = $plan;
-    }
-
-    /**
-     * @return integer
-     */
-    public function getUserId()
-    {
-        return $this->getUserId();
     }
 
     /**
@@ -484,5 +517,22 @@ class FlatSale extends Property_sale
     {
         $this->offer_type = $offer_type;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMainPhoto()
+    {
+        return $this->main_photo;
+    }
+
+    /**
+     * @param mixed $main_photo
+     */
+    public function setMainPhoto($main_photo)
+    {
+        $this->main_photo = $main_photo;
+    }
+
 
 }

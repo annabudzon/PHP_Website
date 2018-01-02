@@ -8,13 +8,21 @@
             <link rel="stylesheet" href="{{ asset('css/base.css') }}" type="text/css" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('images/home_icon.png') }}" />
+    {% block javascripts %}
+        {% endblock %}
    {% endblock %}
 </head>
 <body>
     <!--- Header --->
     <header class="header">
         {% block header %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="admin-nav">
+                    <a href="{{ path("manage_offers") }}">Admin view - manage offers</a>
+                </div>
+            {% endif %}
             <div class="background-image"></div>
+
             <a class ="logo" href="/" id="logoLink"><img src="{{ asset('images/homeworthy_logo.png') }}" height=120 width=340 /></a>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <div class="logged">
@@ -34,7 +42,7 @@
                         <div class="sign">
                             <ul>
                                 <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
-                                <li><a class="register" href="/register">Register</a></li>
+                                <li><a class="register" href="{{ path('fos_user_registration_register') }}">Register</a></li>
                             </ul>
                         </div>
                     {% endif %}

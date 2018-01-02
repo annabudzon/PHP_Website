@@ -11,12 +11,14 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\FlatSale;
 use AppBundle\Entity\Localization;
 use AppBundle\Entity\Offer_type;
+use AppBundle\Entity\Photo;
 use AppBundle\Entity\Property_type;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Ivory\GoogleMap\Map;
+use AppBundle\Service\FileUploader;
+
 /**
  * @Route("flat_sale")
  */
@@ -27,12 +29,14 @@ class FlatSaleController extends Controller
      * @Route("/add", name="add_flat_sale")
      * @Method({"GET", "POST"})
      * @param Request $request
+     * @param FileUploader $fileUploader
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newFlatSaleAction(Request $request){
+    public function newFlatSaleAction(Request $request, FileUploader $fileUploader){
 
         $localization = new Localization();
         $flat_sale = new FlatSale();
+
         $flat_sale->setUser($this->getUser());
         $flat_sale->setLocalization($localization);
         $flat_sale->setPropertyType($this->getDoctrine()->getRepository(Property_type::class)->find(1));
@@ -42,6 +46,23 @@ class FlatSaleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+           /* foreach($flat_sale->getFlatPhotos() as $photo) {
+               $file = $this->getDoctrine()->getRepository(Photo::class)->find($photo);
+               $fileName = $fileUploader->upload($file->getPhoto());
+
+               $file->setPhoto($fileName);
+            }
+
+            $filePlan = $flat_sale->getPlan();
+            $planName = $fileUploader->upload($filePlan->getPhoto());
+
+            $img = new Photo();
+            $img->setPhoto($planName);
+            $img->setFlatSale($flat_sale);
+
+            $filePlan->setPhoto($planName);
+            $flat_sale->setPlan($filePlan);*/
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($flat_sale);
             $em->persist($localization);

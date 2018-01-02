@@ -6,6 +6,33 @@
         {{ parent() }}
         <link rel="stylesheet" href="{{ asset('css/add.css') }}" type="text/css"/>
     {% endblock %}
+    {#% block javascripts %}
+    <script type="text/javascript">
+        // keep track of how many email fields have been rendered
+        var photoCount = '{{ form.flatPhotos|length }}';
+
+        jQuery(document).ready(function() {
+            jQuery('#add-another-photo').click(function(e) {
+                e.preventDefault();
+
+                var photoList = jQuery('#add-another-photo');
+
+                // grab the prototype template
+                var newWidget = photoList.attr('data-prototype');
+                // replace the "__name__" used in the id and name of the prototype
+                // with a number that's unique to your emails
+                // end name attribute looks like name="contact[emails][2]"
+                // language=JSRegexp
+                newWidget = newWidget.replace(/__name__/g, photoCount);
+                photoCount++;
+
+                // create a new list element and add it to the list
+                var newLi = jQuery('<li></li>').html(newWidget);
+                newLi.appendTo(photoList);
+            });
+        })
+    </script>
+    {% endblock %#}
 {% endblock %}
 
 {% block header %}
@@ -19,20 +46,25 @@
         <div class="container">
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <ul>
-                {#% for photo in form.roomPhotos%#}
-                <!--- <li>
-                            {#% include '@VichUploader/Form/fields.html.twig' %#}
-                        </li>--->
-                {#% endfor %#}
-            </ul>
+            {{ form_widget(form.plan , { 'label': false }) }}
+            {{ form_widget(form.mainPhoto) }}
+
+            <!---<ul id="photos-fields-list" class="collection-container"
+                data-prototype="{ form_widget(form.flatPhotos.vars.prototype)|e }}">
+                {#% for photoField in form.flatPhotos %}
+                    <li>
+                        {{ form_widget(photoField) }}
+                    </li>
+                {% endfor %#}
+            </ul>--->
+
+            <a href="#" id="add-another-photo" class="collection-add">Add another photo</a>
 
             <div class="clearfix">
                 <a href="{{ path('add') }}" name="cancel" class="cancelbtn">Cancel</a>
                 <input type="submit" class="addbtn" value="Create" />
             </div>
             {{ form_end(form) }}
-        </div>
     </div>
     <div class="space2"></div>
 </div>

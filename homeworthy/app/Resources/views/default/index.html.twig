@@ -11,6 +11,11 @@
 <body>
 
 {% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="admin-nav">
+            <a href="{{ path("manage_offers") }}">Admin view - manage offers</a>
+        </div>
+    {% endif %}
 <!--- Header --->
 <header class="header">
     <a class ="logo" href="/" id="logoLink"><img src="{{ asset('images/homeworthy_logo.png') }}" height=120 width=340 /></a>

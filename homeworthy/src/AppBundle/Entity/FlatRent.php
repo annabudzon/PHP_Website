@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -71,13 +72,25 @@ class FlatRent extends  Property_rental
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Photo", mappedBy="flat_rental", cascade={"all", "remove"})
+     * @ORM\OneToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", mappedBy="flat_rental", cascade={"all", "remove"})
      */
     private $flat_photos;
 
     /**
+     *  @var \Application\Sonata\MediaBundle\Entity\Media
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Photo", mappedBy="flat_rental", cascade={"all", "remove"})
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="mainPhoto", referencedColumnName="id")
+     *
+     */
+    private $main_photo;
+
+    /**
+     *  @var \Application\Sonata\MediaBundle\Entity\Media
+     *
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="plan", referencedColumnName="id")
+     *
      */
     private $plan;
 
@@ -94,9 +107,32 @@ class FlatRent extends  Property_rental
     public function __construct()
     {
         $this->flat_photos = new ArrayCollection();
-        $this->plan = new ArrayCollection();
     }
 
+
+    /**
+     * Add photo
+     *
+     * @param Media $photo
+     * @return FlatRent
+     */
+    public function addPhoto(Media $photo)
+    {
+        $this->flat_photos[] = $photo;
+
+        return $this;
+
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param Media $photo
+     */
+    public function removePhoto(Media $photo)
+    {
+        $this->flat_photos->removeElement($photo);
+    }
     /**
      * @return mixed
      */
@@ -540,11 +576,19 @@ class FlatRent extends  Property_rental
     }
 
     /**
-     * @return integer
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
-    public function getUserId()
+    public function getMainPhoto()
     {
-        return $this->getUserId();
+        return $this->main_photo;
+    }
+
+    /**
+     * @param \Application\Sonata\MediaBundle\Entity\Media $main_photo
+     */
+    public function setMainPhoto($main_photo)
+    {
+        $this->main_photo = $main_photo;
     }
 
     /**

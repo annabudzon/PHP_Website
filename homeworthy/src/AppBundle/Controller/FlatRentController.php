@@ -16,7 +16,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Ivory\GoogleMap\Map;
 
 /**
  * @Route("flat_rent")
@@ -34,6 +33,7 @@ class FlatRentController extends Controller
 
         $localization = new Localization();
         $flat_rental = new FlatRent();
+
         $flat_rental->setUser($this->getUser());
         $flat_rental->setLocalization($localization);
         $flat_rental->prePersist();
@@ -48,7 +48,7 @@ class FlatRentController extends Controller
             $em->persist($localization);
             $em->flush();
 
-            return $this->redirectToRoute('show_flat_rent', array('id' => $flat_rental->getIdFlat(), 'status' => true));
+            return $this->redirectToRoute('show_flat_rent', array('id' => $flat_rental->getIdFlat()));
         }
 
         return $this->render('flat_rent/add_frent.html.twig', array(
@@ -70,9 +70,10 @@ class FlatRentController extends Controller
      * @Route("/{id}", name="show_flat_rent")
      * @Method("GET")
      *
+     * @param Request $request
      * @param integer $id
-     * @param boolean $status
      * @return \Symfony\Component\HttpFoundation\Response
+     * @internal param bool $status
      */
     public function showFlatRentAction(Request $request, $id){
         $last_route = $request->headers->get('referer');

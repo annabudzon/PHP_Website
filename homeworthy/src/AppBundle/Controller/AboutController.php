@@ -23,4 +23,5 @@ class AboutController extends Controller
 
         return $this->render('my_page/about.html.twig');
     }
+
 }

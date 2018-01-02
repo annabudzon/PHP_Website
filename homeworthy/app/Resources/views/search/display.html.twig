@@ -22,7 +22,7 @@
                         <a href="{{ path('show_room', { 'id': room.getIdRoom() }) }}"><div class="short">
                                 <ul>
                                     <h1>{{ room.title }}</h1>
-                                    <img src="{{ asset('images/default-image.png') }}" alt="Room photo." width="160" height="100" />
+                                    <div class="image">{% media room.mainPhoto, 'small' %}</div>
                                     <li><strong>{{ 'Type of property' }}:</strong> {{room.propertyType }}</li>
                                     <li><strong>{{ 'Localization' }}:</strong> {{ room.localization }}</li>
                                     <li><strong>{{ 'Publicated' }}:</strong> {{ room.date|date(" m/d/Y  H:i:s") }}</li>
@@ -37,7 +37,7 @@
                         <a href="{{ path('show_flat_sale', { 'id': flat.getIdFlat() }) }}"><div class="short">
                                 <ul>
                                     <h1>{{ flat.title }}</h1>
-                                    <img src="{{ asset('images/default-image.png') }}" alt="Flat photo." width="160" height="100" />
+                                    <div class="image">{% media flat.mainPhoto, 'small' %}</div>
                                     <li><strong>{{ 'Type of property' }}:</strong> {{ flat.propertyType }}</li>
                                     <li><strong>{{ 'Localization' }}:</strong> {{ flat.localization }}</li>
                                     <li><strong>{{ 'Publicated' }}:</strong> {{ flat.date|date(" m/d/Y  H:i:s") }}</li>
@@ -52,7 +52,7 @@
                         <a href="{{ path('show_flat_rent', { 'id': flat.getIdFlat() }) }}"><div class="short">
                                 <ul>
                                     <h1>{{ flat.title }}</h1>
-                                    <img src="{{ asset('images/default-image.png') }}" alt="Flat photo." width="160" height="100" />
+                                    <div class="image">{% media flat.mainPhoto, 'small' %}</div>
                                     <li><strong>{{ 'Type of property' }}:</strong> {{ flat.propertyType }}</li>
                                     <li><strong>{{ 'Localization' }}:</strong> {{ flat.localization }}</li>
                                     <li><strong>{{ 'Publicated' }}: </strong>{{ flat.date|date(" m/d/Y  H:i:s") }}</li>

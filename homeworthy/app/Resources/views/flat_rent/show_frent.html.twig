@@ -16,7 +16,8 @@
     <div class="wrapper">
         <div class = "content">
             <h2>{{ flat_rent.title }}</h2>
-
+            <p><div class="image">{% media flat_rent.plan, 'big' %}</div></p>
+            <p><div class="image">{% media flat_rent.mainPhoto, 'big' %}</div></p>
             <p><span>{{ 'Publicated' }}</span>: {{ flat_rent.date|date(" m/d/Y H:i:s") }}</p>
             <p><span>{{ 'Type of property'}}</span>: {{ flat_rent.propertyType }}
             <p><span>{{ 'Type of offer'}}</span>: {{ flat_rent.offerType }}
@@ -42,9 +43,17 @@
             <p><span>{{ 'Pets' }}</span>: {{ flat_rent.pets ? 'Yes':'No' }} </p>
 
             <div class="buttons">
+    {% if app.user %}
+        {% if (is_granted('ROLE_ADMIN') or (flat_rent.user == app.user)) %}
             <button onclick="location.href='{{ path('edit_flat_rent', { 'id': flat_rent.getIdFlat() }) }}'" type="button" class="btn" >Edit</button>
             <button onclick="location.href='{{ path('confirm_delete_flat_rent', { 'id': flat_rent.getIdFlat() }) }}'" type="submit" class="btn" >Delete</button>
             <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+        {% else %}
+            <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+        {% endif %}
+    {% else %}
+        <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+    {% endif %}
             </div>
         </div>
         <div class="space"></div>

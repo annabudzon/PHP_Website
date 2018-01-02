@@ -33,12 +33,14 @@ class RoomController extends Controller
 
         $localization = new Localization();
         $room_rental = new RoomRent();
+
         $room_rental->setUser($this->getUser());
         $room_rental->setLocalization($localization);
         $room_rental->prePersist();
         $room_rental->setPropertyType($this->getDoctrine()->getRepository(Property_type::class)->find(2));
         $room_rental->setOfferType($this->getDoctrine()->getRepository(Offer_type::class)->find(2));
         $form = $this->createForm('AppBundle\Form\RoomRentType', $room_rental);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -148,7 +150,7 @@ class RoomController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('confirm_delete');
+        return $this->redirectToRoute('confirm_delete_room');
     }
 
     /**

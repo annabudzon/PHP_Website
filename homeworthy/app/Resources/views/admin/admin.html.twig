@@ -1,0 +1,83 @@
+{% extends "base.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <title>{% block title %}Admin view - Manage offers{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/offers.css') }}" type="text/css"/>
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class = "content">
+            <div class="container">
+                <h2>Manage offers</h2>
+                <h3>Rooms:</h3>
+                {% if rooms_rent %}
+                    {% for room in rooms_rent %}
+                        <a href="{{ path('show_room', { 'id': room.getIdRoom() }) }}"><div class="short">
+                                <ul>
+                                    <h1>{{ room.title }}</h1>
+                                    <div class="image">{% media room.mainPhoto, 'small' %}</div>
+                                    <li><strong>{{ 'Type of property' }}:</strong> {{room.propertyType }}</li>
+                                    <li><strong>{{ 'Localization' }}:</strong> {{ room.localization }}</li>
+                                    <li><strong>{{ 'Publicated' }}:</strong> {{ room.date|date(" m/d/Y  H:i:s") }}</li>
+                                    <li class="price"><strong>{{ 'Total price' }}: </strong>{{ room.totalPrice }}</li>
+                                </ul>
+                            </div></a>
+                    {% endfor %}
+                {% endif %}
+                <div class="line-separator"></div>
+                <h3>Flat for sale:</h3>
+                {% if flats_sale %}
+                    {% for flat in flats_sale %}
+                        <a href="{{ path('show_flat_sale', { 'id': flat.getIdFlat() }) }}"><div class="short">
+                                <ul>
+                                    <h1>{{ flat.title }}</h1>
+                                    <div class="image">{% media flat.mainPhoto, 'small' %}</div>
+                                    <li><strong>{{ 'Type of property' }}:</strong> {{ flat.propertyType }}</li>
+                                    <li><strong>{{ 'Localization' }}:</strong> {{ flat.localization }}</li>
+                                    <li><strong>{{ 'Publicated' }}:</strong> {{ flat.date|date(" m/d/Y  H:i:s") }}</li>
+                                    <li class="price"><strong>{{ 'Total price' }}:</strong> {{ flat.totalPrice }}</li>
+                                </ul>
+                            </div></a>
+                    {% endfor %}
+                {% endif %}
+                <div class="line-separator"></div>
+                <h3>Flat for rent:</h3>
+                {% if flats_rent %}
+                    {% for flat in flats_rent %}
+                        <a href="{{ path('show_flat_rent', { 'id': flat.getIdFlat()}) }}"><div class="short">
+                                <ul>
+                                    <h1>{{ flat.title }}</h1>
+                                    <div class="image">{% media flat.mainPhoto, 'small' %}</div>
+                                    <li><strong>{{ 'Type of property' }}:</strong> {{ flat.propertyType }}</li>
+                                    <li><strong>{{ 'Localization' }}:</strong> {{ flat.localization }}</li>
+                                    <li><strong>{{ 'Publicated' }}: </strong>{{ flat.date|date(" m/d/Y  H:i:s") }}</li>
+                                    <li class="price"><strong>{{ 'Total price' }}:</strong> {{ flat.totalPrice }}</li>
+                                </ul>
+                            </div></a>
+                    {% endfor %}
+                {% endif %}
+                <div class="line-separator"></div>
+                {% if not flats_rent and not flats_sale and not rooms_rent %}
+                    <div class="empty">
+                        <h1 class="empty-data">{{ 'Nothing to display! Add new offer: ' }}</h1>
+                        <a href="{{ '/add' }}" class="add-offer">Add offer</a>
+                    </div>
+                {% endif %}
+                <button onclick="location.href='{{ last_route }}'" type="button" id="back" name="back" class="button-back">Back</button>
+            </div>
+        </div>
+        <div class="space"></div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

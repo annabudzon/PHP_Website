@@ -29,7 +29,7 @@
 body{
     line-height: 1.2em;
     width: 100%;
-    margin: 0;
+    margin: 20px 0 0 0;
     padding: 0;
     background: #E8E8E8;
     font-family: "Quicksand", sans-serif;
@@ -128,9 +128,9 @@ label.info{
     text-align: left;
     margin-top: 30px;
     opacity: 0.7;
-    width: 120px;
+    width: 150px;
     height: 50px;
-    margin-left: 500px;
+    margin-left: 70px;
 }
 
 .space{
@@ -155,4 +155,23 @@ footer p{
     margin-top: 10px;
     color: #D3D3D3;
     font-size: 14px;
+}
+
+.admin-nav{
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 25px;
+    background: #170b15;
+    font-family: 'Arsenal', sans-serif;
+    font-size: 15px;
+    text-align: left;
+    padding: 5px 10px;
+
+}
+
+.admin-nav a{
+    text-decoration:none;
+    color: #E8E8E8;
 }

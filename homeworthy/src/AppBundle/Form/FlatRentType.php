@@ -86,9 +86,29 @@ class FlatRentType extends AbstractType
                 ), 'label' => 'Children',
                 'placeholder' => ' ------- Select -------'))
             ->add('renovation', DateType::class, array('label' => 'Last Renovation', 'placeholder' => ' ---- Select ----'))
-            ->add('description', TextareaType::class, array('label' => 'Description', 'attr' => array('placeholder' =>  'Enter description')));
-            #->add('plan', CollectionType::class, array('entry_type' => PhotoType::class))
-            #->add('flatPhotos', CollectionType::class, array('entry_type' => PhotoType::class));
+            ->add('description', TextareaType::class, array('label' => 'Description', 'attr' => array('placeholder' =>  'Enter description')))
+            ->add('plan', 'sonata_media_type', array(
+                'label' => 'Apartment plan',
+                'provider' => 'sonata.media.provider.image',
+                'context'  => 'images',
+                'required' => true))
+            ->add('mainPhoto', 'sonata_media_type', array(
+                'label' => 'Main Photo',
+                'provider' => 'sonata.media.provider.image',
+                'context'  => 'images',
+                'required' => true));
+            /*->add('flatPhotos', CollectionType::class, array(
+                'entry_type' => 'sonata_media_type',
+                'entry_options' => array(
+                    'label' => false,
+                    'provider' => 'sonata.media.provider.image',
+                    'context'  => 'images',),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'prototype' => true,
+                'required' => false,
+            ));*/
     }
     
     /**

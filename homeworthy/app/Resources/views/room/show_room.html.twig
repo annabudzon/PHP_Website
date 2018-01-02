@@ -16,13 +16,14 @@
 <div class="wrapper">
     <div class = "content">
         <h2>{{ room_rental.title }}</h2>
-
+        <p><div class="image">{% media  room_rental.plan, 'big' %}</div></p>
+        <p><div class="image">{% media  room_rental.mainPhoto, 'big' %}</div></p>
         <p><span>{{ 'Publicated' }}</span>: {{ room_rental.date|date(" m/d/Y H:i:s") }}</p>
         <p><span>{{ 'Type of property'}}</span>: {{ room_rental.propertyType }}
         <p><span>{{ 'Type of offer'}}</span>: {{ room_rental.offerType }}
         <p><span>{{ 'Owner type'}}</span>: {{ room_rental.ownerType }}
         <p><span>{{ 'Owner '}}</span>: {{ room_rental.user }}
-        <p><span>{{ 'Description' }}</span>: {{ room_rental.description ? 'Yes':'No' }}</p>
+        <p><span>{{ 'Description' }}</span>: {{ room_rental.description }}</p>
         <p><span>{{ 'Available from'}}</span>: {{ room_rental.available|date(" m/d/Y")}}</p>
         <p><span>{{ 'Localization'}}</span>: {{ room_rental.localization }} </p>
         <p><span>{{ 'Building '}}</span>: {{ room_rental.building }}</p>
@@ -42,9 +43,17 @@
         <p><span>{{ 'Pets' }}</span>: {{ room_rental.pets ? 'Yes':'No' }} </p>
 
         <div class="buttons">
-            <button onclick="location.href='{{ path('edit_room', { 'id': room_rental.getIdRoom() }) }}'" type="button" class="btn" >Edit</button>
-            <button onclick="location.href='{{ path('confirm_delete_room', { 'id': room_rental.getIdRoom() }) }}'" type="button" class="btn" >Delete</button>
-            <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+            {% if app.user %}
+                {% if (is_granted('ROLE_ADMIN') or (room_rental.user == app.user)) %}
+                    <button onclick="location.href='{{ path('edit_room', { 'id': room_rental.getIdRoom() }) }}'" type="button" class="btn" >Edit</button>
+                    <button onclick="location.href='{{ path('confirm_delete_room', { 'id': room_rental.getIdRoom() }) }}'" type="button" class="btn" >Delete</button>
+                    <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+                {% else %}
+                    <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+                {% endif %}
+            {% else %}
+                <button onclick="location.href='{{ last_route }}'" type="button" class="btn back" >Back</button>
+            {% endif %}
         </div>
     </div>
     <div class="space"></div>

@@ -1,0 +1,26 @@
+{% extends 'SonataMediaBundle:Form:media_widgets.html.twig' %}
+{% block head %}
+
+{% endblock %}
+{% block sonata_media_type_widget %}
+    {% block stylesheets %}
+
+        <style type="text/css">
+            * {
+
+            }
+        </style>
+        <link rel="stylesheet" href="{{ asset('css/media_widget.css') }}" type="text/css"/>
+    {% endblock %}
+
+<div class="file-container">
+    {{ block('form_widget') }}
+</div>
+
+
+    {%- block checkbox_widget -%}
+
+    {%- endblock checkbox_widget -%}
+
+
+{% endblock sonata_media_type_widget %}

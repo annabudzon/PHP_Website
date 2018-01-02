@@ -22,6 +22,7 @@ h2{
     opacity: 0.8;
     text-transform: uppercase;
     text-align: center;
+    line-height: normal;
 }
 
 p{
@@ -31,6 +32,16 @@ p{
 span{
    font-weight: bold;
     font-size: 20px;
+}
+
+span.plan{
+    clear: both;
+    float: left;
+}
+
+div.image{
+    clear:both;
+    text-align:center;
 }
 
 p .success{
@@ -50,7 +61,7 @@ ul li{
     z-index: 10;
     width: 100%;
     height: 40px;
-    top: 1400px;
+    top: 2300px;
     position:relative;
     display:block;
     clear: both;

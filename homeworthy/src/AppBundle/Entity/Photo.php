@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
@@ -30,28 +29,15 @@ class Photo
     private $id_photo;
 
     /**
+     *
+     *@ORM\Column(type="string")
+     *@Assert\NotBlank(message="Please, upload the photo.")
      *@Assert\File(
-     *     mimeTypes = {"image/png", "image/jpeg", "image/jpg"},
+     *     mimeTypes = {"image/*"},
      *     mimeTypesMessage = "Please upload a valid PDF or valid IMAGE")
-     *@var File
      *
      */
     public $photo;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @var string
-     */
-    private $photo_name;
-
-    /**
-     * Image path
-     *
-     * @var string
-     *
-     * @ORM\Column(type="text", length=255, nullable=false)
-     */
-    protected $path;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FlatRent", inversedBy="flat_photos")
@@ -60,21 +46,26 @@ class Photo
     private $flat_rental;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\RoomRent", mappedBy="plan", cascade={"all", "remove"})
-     */
-    private $room_rental_plan;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\RoomRent", inversedBy="room_photos")
      * @ORM\JoinColumn(name="id_room", referencedColumnName="id_room", onDelete="CASCADE")
      */
+    private $room_rental_photos;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\RoomRent", mappedBy="plan")
+     *
+     */
     private $room_rental;
-
-
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FlatSale", inversedBy="flat_photos")
-     * @ORM\JoinColumn(name="id_flat_sale", referencedColumnName="id_flat_sale", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="flat_sale_id", referencedColumnName="id_flat_sale", onDelete="CASCADE")
+     */
+    private $flat_sale_photos;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\FlatSale", mappedBy="plan")
+     *
      */
     private $flat_sale;
 
@@ -84,6 +75,10 @@ class Photo
      * @var \DateTime
      */
     private $updatedAt;
+
+    public function __construct() {
+        $this->updatedAt = new \DateTime;
+    }
 
     /**
      * @return integer
@@ -169,7 +164,7 @@ class Photo
 
 
     /**
-     * @return File|null
+     * @return string
      */
     public function getPhoto()
     {
@@ -177,53 +172,13 @@ class Photo
     }
 
     /**
-     * @return string|null
+     * @param string $photo
      */
-    public function getPhotoName()
+    public function setPhoto($photo)
     {
-        return $this->photo_name;
+        $this->photo = $photo;
     }
 
-    /**
-     * @param string $photo_name
-     */
-    public function setPhotoName($photo_name)
-    {
-        $this->photo_name = $photo_name;
-    }
-
-    /**
-     *
-     * @return Photo
-     */
-    public function getPhotoSize()
-    {
-        return $this->photo_size;
-    }
-
-    /**
-     * @param integer $photo_size
-     */
-    public function setPhotoSize($photo_size)
-    {
-        $this->photo_size = $photo_size;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRoomRentalPlan()
-    {
-        return $this->room_rental_plan;
-    }
-
-    /**
-     * @param mixed $room_rental_plan
-     */
-    public function setRoomRentalPlan($room_rental_plan)
-    {
-        $this->room_rental_plan = $room_rental_plan;
-    }
 
     /**
      * @return \DateTime
@@ -241,6 +196,29 @@ class Photo
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFlatSalePhotos()
+    {
+        return $this->flat_sale_photos;
+    }
+
+    /**
+     * @param mixed $flat_sale_photos
+     */
+    public function setFlatSalePhotos($flat_sale_photos)
+    {
+        $this->flat_sale_photos = $flat_sale_photos;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->photo;
+    }
 
 
 }

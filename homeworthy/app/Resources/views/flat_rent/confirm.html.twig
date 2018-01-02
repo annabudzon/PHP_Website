@@ -19,7 +19,7 @@
         <div class="short">
             <ul>
                 <h1>{{ flat_rent.title }}</h1>
-                <img src="{{ asset('images/default-image.png') }}" alt="Room photo." width="160" height="100" />
+                <div class="image">{% media flat_rent.mainPhoto, 'small' %}</div>
                 <li><strong>{{ 'Type of property' }}:</strong> {{flat_rent.propertyType }}</li>
                 <li><strong>{{ 'Type of offer' }}:</strong> {{flat_rent.offerType }}</li>
                 <li><strong>{{ 'Localization' }}:</strong> {{ flat_rent.localization }}</li>
